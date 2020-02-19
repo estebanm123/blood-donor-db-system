@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 		  results = results.rows;
 		  client.end();
 		  
-		  		  res.json(JSON.stringify(results));
+		res.json(JSON.stringify(results));
 
 	})
 	.catch( (err) => {
