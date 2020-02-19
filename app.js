@@ -43,8 +43,8 @@
 // });
 
 
-var indexRouter = require('./routes/index');
 const express = require('express');
+var indexRouter = require('./routes/index');
 const path = require('path');
 
 const app = express();
@@ -61,6 +61,7 @@ app.use("/api/test", indexRouter);
 	
   // const data = "ok";
 
+  // // Return them as json
   // res.json(data);
 // });
 
