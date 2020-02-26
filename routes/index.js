@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Client } = require('pg');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 
 
@@ -14,13 +13,12 @@ router.get('/', function(req, res, next) {
 	client.connect();
 	
 	results = [];
-	client.query('select  * from ok')
+	client.query('select  * from administrator')
 	.then( (results) => {
 		  console.log(results.rows);
 		  results = results.rows;
 		  client.end();
-		  
-		  		  res.json(JSON.stringify(results));
+		  res.json(JSON.stringify(results));
 
 	})
 	.catch( (err) => {
