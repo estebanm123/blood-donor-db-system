@@ -1,5 +1,6 @@
 const express = require('express');
-var indexRouter = require('./routes/index');
+var bodyParser = require('body-parser');
+var loginRouter = require('./routes/login');
 const path = require('path');
 
 const app = express();
@@ -10,7 +11,12 @@ if (process.env.NODE_ENV === "dev") {
 	app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
-app.use("/api/test", indexRouter);
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+app.use("/api/login", loginRouter);
 
 
 if (process.env.NODE_ENV === "dev") {
