@@ -14,8 +14,8 @@ const styles = makeStyles(theme => ({
 const App = () => {
 
 	const classes = styles();
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [curUser, setCurUser] = useState({});
+	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [curUser, setCurUser] = useState({userType: 'Nurse'});
 
 	const handleLogin = (user) => {
 		setIsLoggedIn(true);

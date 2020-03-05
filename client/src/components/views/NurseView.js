@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import WelcomePanel from "../menuGenerics/WelcomePanel";
 import AddNonStaff from "./AddNonStaff";
 import MainPanel from "../menuGenerics/MainPanel";
+import Search from "./Search";
 
 
 const styles = makeStyles(theme => ({
