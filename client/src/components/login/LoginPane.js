@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
@@ -36,13 +35,15 @@ const styles = makeStyles(theme => ({
 
 }));
 
-const LoginPane = () => {
+const LoginPane = (props) => {
 
     const classes = styles();
 
-    function handleFormSubmit(event) {
+    let [error, setError] = useState(false);
+    let [statusMessage, setStatusMessage] = useState("");
+
+    const handleFormSubmit = (event) => {
         event.preventDefault();
-        console.log(event.target);
         let formData = {};
         let inputs = event.target.querySelectorAll('input');
         formData["userType"] = event.target.querySelector('select').value;
@@ -58,16 +59,30 @@ const LoginPane = () => {
                 return res.json();
             })
             .then((res) => {
-                console.log(res);
+                if (!res || res === "error") {
+                    throw new Error();
+                }
+                let parsedRes = JSON.parse(res);
+                if (parsedRes.rows.length !== 0) {
+                    let userInfo = parsedRes.rows[0];
+                    userInfo['userType'] = formData['userType'];
+                    props.handleLogin(userInfo);
+                } else {
+                    setStatusMessage("This ID password combo does not exist.");
+                    setError(true);
+                }
             })
             .catch( (err) => {
                 console.error(err);
+                setStatusMessage("An error has occurred.");
+                setError(true);
             });
     }
 
+
     return (
         <Paper className={classes['login-paper']}>
-            <form onSubmit={handleFormSubmit} method={"post"}>
+            <form onSubmit={handleFormSubmit}>
                 <Grid container direction="column" justify="center" alignItems="center" className={classes["login-details"]}>
                     <Grid item>
                         <Typography>Login as: </Typography>
@@ -78,8 +93,8 @@ const LoginPane = () => {
                         </Select>
                     </Grid>
                     <Grid item>
-                        <TextField label={"ID"} />
-                        <TextField type={"password"} label={"Password"} />
+                        <TextField error={error} label={"ID"} helperText={statusMessage}/>
+                        <TextField error={error} type={"password"} label={"Password"} />
                     </Grid>
                     <Grid item>
                         <Button type={"submit"} variant={"contained"} className={classes['submit']}>Login</Button>

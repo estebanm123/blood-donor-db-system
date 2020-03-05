@@ -13,12 +13,9 @@ const styles = makeStyles(theme => ({
     }
 }));
 
-
-
-const Login = () => {
+const Login = (props) => {
 
     const classes = styles();
-
 
     return (
         <Grid container direction="column" justify="center" alignItems="center">
@@ -28,7 +25,7 @@ const Login = () => {
                 </Typography>
             </Grid>
             <Grid item>
-                <LoginPane />
+                <LoginPane handleLogin={props.handleLogin}/>
             </Grid>
         </Grid>
 

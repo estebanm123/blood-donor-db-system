@@ -1,33 +1,29 @@
 const express = require('express');
-var bodyParser = require('body-parser');
-var loginRouter = require('./routes/login');
+const bodyParser = require('body-parser');
+const loginRouter = require('./routes/login');
+const nonstaffRouter = require('./routes/nonstaffRouter');
 const path = require('path');
 
 const app = express();
 
-if (process.env.NODE_ENV === "dev") {
-	app.use(express.static(path.join(__dirname, 'public')));
-} else {
-	app.use(express.static(path.join(__dirname, 'client/build')));
-}
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
 
+// routes
 app.use("/api/login", loginRouter);
+app.use("/api/nonstaff", nonstaffRouter);
 
 
-if (process.env.NODE_ENV === "dev") {
-	app.get('*', (req, res) => {
-	res.send("dev mode: use api endpoint");
+
+app.get('*', (req, res) => {
+res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
-} else {
-	app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-}
 
 const port = process.env.PORT || 5000;
 app.listen(port);
