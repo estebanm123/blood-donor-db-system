@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import WelcomePanel from "../menuGenerics/WelcomePanel";
 import AddNonStaff from "./AddNonStaff";
+import AddNurse from "./AddNurse";
 import MainPanel from "../menuGenerics/MainPanel";
 import Search from "./Search";
 
@@ -10,7 +11,7 @@ import Search from "./Search";
 const styles = makeStyles(theme => ({
 }));
 
-const NurseView = (props) => {
+const AdminView = (props) => {
 
     let [curSelected, setCurSelected] = useState(undefined);
     const classes = styles();
@@ -30,7 +31,7 @@ const NurseView = (props) => {
                 let extraFieldName = (categoryName === 'Patients')? 'Amount Required ml' : 'Can donate';
                 let extraFieldMessage = (categoryName === 'Patients')? 'Required. Positive integers.' : '';
 
-                displayPanel = <AddNonStaff
+                displayPanel = <AddNurse
                     categoryName={categoryName}
                     extraFieldName={extraFieldName}
                     extraFieldMessage={extraFieldMessage}
@@ -47,7 +48,7 @@ const NurseView = (props) => {
 
         return (
         <MainPanel
-            categories={[{'Patients': ['Add', 'Search', 'Transfusion']}, {'Donors': ['Add', 'Search', 'Donation']}]}
+            categories={[{'Nurse': ['Add', 'Search']}, {'Lab': ['Add', 'Search']}, {'Donation Reserve': ['View Reserve']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
             displayPanel={displayPanel}
@@ -56,4 +57,4 @@ const NurseView = (props) => {
     );
 }
 
-export default NurseView;
+export default AdminView;
