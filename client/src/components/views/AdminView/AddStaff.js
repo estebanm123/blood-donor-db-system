@@ -4,11 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useForm } from 'react-hook-form';
@@ -23,18 +18,12 @@ const styles = makeStyles(theme => ({
         'margin-top': '2.5rem',
         'padding': '2rem'
     },
-    birthDate: {
-        width: '12rem'
-    },
     submit: {
         'margin': '3rem 0 2rem 0'
-    },
-    canDonate: {
-        'font-size': '.7rem'
     }
 }));
 
-const AddNonStaff = (props) => {
+const AddStaff = (props) => {
 
     let classes = styles();
     const {register, errors, handleSubmit} = useForm();
@@ -108,13 +97,13 @@ const AddNonStaff = (props) => {
                                    label={"Password"}
                                    helperText={errors.Password? "Required. 32 chars max." : "Required"}/>
                     </Grid>
-                    <Grid item>
+                    {/* <Grid item>
                         <TextField name={"LocationID"}
                                    error={errors.LocationID}
                                    inputRef={register({ required: true, maxLength: 8})}
                                    label={"LocationID"}
                                    helperText={errors.LocationID? "Required. 8 chars max." : "Required"}/>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container justify={"space-evenly"} alignItems={"center"}>
                     <TextField name={"Email"}
@@ -137,6 +126,26 @@ const AddNonStaff = (props) => {
                                    helperText={errors.Name? "Required. 64 chars max.  " : "Required"}/>
                     </Grid>
                 </Grid>
+                <Grid container justify={"space-evenly"} alignItems={"center"}>
+                    <Grid item>
+                        {props.extraFieldName === 'LocationID' &&  <TextField
+                            label={props.extraFieldName}
+                            error={errors[props.extraFieldName]}
+                            inputRef={register({ required: true, maxLength: 8})}
+                            name={props.extraFieldName}
+                            helperText={errors[props.extraFieldName]? "Required. 8 chars max." : "Required"}
+
+                        />}
+                        {props.extraFieldName === 'Can donate' &&
+                        <>
+                            <Typography className={classes.canDonate}>Can donate</Typography>
+                            <Select native inputRef={register}>
+                                <option value={"true"} >True</option>
+                                <option value={"false"} >False</option>
+                            </Select>
+                        </>}
+                    </Grid>
+                </Grid>
                 <Grid item>
                     <Button type={"submit"} variant={"contained"} className={classes['submit']}>Submit</Button>
                     <Typography className={classes.apiError}>{apiError} </Typography>
@@ -154,4 +163,4 @@ const AddNonStaff = (props) => {
     );
 }
 
-    export default AddNonStaff;
+    export default AddStaff;

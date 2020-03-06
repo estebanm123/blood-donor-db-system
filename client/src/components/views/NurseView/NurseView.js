@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import WelcomePanel from "../menuGenerics/WelcomePanel";
+import WelcomePanel from "../../menuGenerics/WelcomePanel";
 import AddNonStaff from "./AddNonStaff";
-import MainPanel from "../menuGenerics/MainPanel";
+import MainPanel from "../../menuGenerics/MainPanel";
 import Search from "./Search";
 
 

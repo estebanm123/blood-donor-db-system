@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import WelcomePanel from "../menuGenerics/WelcomePanel";
-import AddNonStaff from "./AddNonStaff";
-import AddNurse from "./AddNurse";
-import MainPanel from "../menuGenerics/MainPanel";
-import Search from "./Search";
+import WelcomePanel from "../../menuGenerics/WelcomePanel";
+import AddStaff from "./AddStaff";
+import MainPanel from "../../menuGenerics/MainPanel";
+import AddLab from "./AddLab";
 
 
 const styles = makeStyles(theme => ({
@@ -27,28 +26,31 @@ const AdminView = (props) => {
         let categoryName = curSelected.parentElement.previousElementSibling.textContent;
         let subCategoryName = curSelected.firstChild.textContent;
         switch (subCategoryName) {
-            case("Add"):
-                let extraFieldName = (categoryName === 'Patients')? 'Amount Required ml' : 'Can donate';
-                let extraFieldMessage = (categoryName === 'Patients')? 'Required. Positive integers.' : '';
 
-                displayPanel = <AddNurse
+            case("Add Nurse"):
+            case("Add Administrator"):
+                let extraFieldName = (categoryName === 'Nurse')? 'LocationID' : '';
+                let extraFieldMessage = (categoryName === 'Nurse')? 'Required. 8 chars max..' : '';
+                displayPanel = <AddStaff
                     categoryName={categoryName}
                     extraFieldName={extraFieldName}
                     extraFieldMessage={extraFieldMessage}
                     extraField/>;
-                title = `Add ${categoryName}`;
+                title = `Add New ${categoryName}`;
                 break;
-            case("Search"):
-                displayPanel = <Search />
-
+            case("Add Lab"):
+                displayPanel = <AddLab />;
+                title = 'Add New Lab';
+                break;
         }
     }
 
-
-
         return (
         <MainPanel
-            categories={[{'Nurse': ['Add', 'Search']}, {'Lab': ['Add', 'Search']}, {'Donation Reserve': ['View Reserve']}]}
+            categories={[{'Nurse': ['Add Nurse', 'Search']},
+            {'Administrator': ['Add Administrator', 'Search']},
+            {'Lab': ['Add Lab', 'Search']}, 
+            {'Donation Reserve': ['View Reserve']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
             displayPanel={displayPanel}
