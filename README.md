@@ -6,16 +6,23 @@ Requires node installed.
 
 Setup:
 - run the following commands:
+
 npm i
+
 cd client
+
 npm i
 
 And you'd need to set the environment variable DATABASE_URL. 
 
 To run locally:
 - run the following commands:
+
 cd client
+
 yarn build
+
 cd ..
+
 npm start 
 
