@@ -113,7 +113,7 @@ const AddNonStaff = (props) => {
                                    error={errors.Email}
                                    inputRef={register({ required: true, maxLength: 64 })}
                                    label={"Email"}
-                                   helperText={errors.ID? "Required. 64 chars max." : "Required"}/>
+                                   helperText={errors.Email? "Required. 64 chars max." : "Required"}/>
                     </Grid>
                 </Grid>
                 <Grid container justify={"space-evenly"} alignItems={"center"}>
@@ -121,7 +121,7 @@ const AddNonStaff = (props) => {
                                error={errors.Address}
                                inputRef={register({ required: true, maxLength: 64 })}
                                label={"Address"}
-                               helperText={errors.ID? "Required. 255 chars max." : "Required"}/>
+                               helperText={errors.Address? "Required. 255 chars max." : "Required"}/>
                     <Grid item>
                         <TextField name={"Phone"}
                                    error={errors.Phone}
@@ -134,7 +134,7 @@ const AddNonStaff = (props) => {
                                    error={errors.Height}
                                    inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                    label={"Height cm"}
-                                   helperText={errors.ID? "Required. Positive Integer.  " : "Required"}/>
+                                   helperText={errors.Height? "Required. Positive Integer.  " : "Required"}/>
                     </Grid>
                 </Grid>
                 <Grid container justify={"space-evenly"} alignItems={"center"}>
@@ -169,7 +169,7 @@ const AddNonStaff = (props) => {
                                    error={errors.BloodType}
                                    inputRef={register({ required: true, maxLength: 6 })}
                                    label={"Blood Type"}
-                                   helperText={errors.Weight? "Required. Blood Type invalid." : "Required"}/>
+                                   helperText={errors.BloodType? "Required. Blood Type invalid." : "Required"}/>
                     </Grid>
                 </Grid>
                 <Grid container justify={"space-evenly"} alignItems={"center"}>
