@@ -10,6 +10,9 @@ import { useForm } from 'react-hook-form';
 import Select from "@material-ui/core/Select";
 
 
+// need to assure that the locationID being added exists in the location table
+// or else it will say 'successfully added' but won't be added
+
 const styles = makeStyles(theme => ({
     backgroundPaper: {
         '& div.MuiGrid-item': {
@@ -40,17 +43,11 @@ const AddStaff = (props) => {
         setAddSuccessful(false);
     }
 
-    let onSubmit = (data) => {
-        let dateOfBirth = document.querySelector('#date-picker-dialog').value;
-        if (props.categoryName === 'Donors') {
-            let select = document.querySelector('select'); // grab the only select in document - refactor if you add more
-            data['canDonate'] = select.value;
-        }
-
-        data['birthdate'] = dateOfBirth;
+    let onSubmit = (data) => {       
         data['category'] = props.categoryName;
+        console.log(data);
 
-        fetch(`/api/nonstaff/add`, {
+        fetch(`/api/staff/add`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(data)
@@ -115,7 +112,7 @@ const AddStaff = (props) => {
                         <TextField name={"Phone"}
                                    error={errors.Phone}
                                    inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
-                                   label={"Phone #"}
+                                   label={"Phone"}
                                    helperText={errors.Phone? "Required. 10 digits max." : "Required"}/>
                     </Grid>
                     <Grid item>
@@ -136,14 +133,6 @@ const AddStaff = (props) => {
                             helperText={errors[props.extraFieldName]? "Required. 8 chars max." : "Required"}
 
                         />}
-                        {props.extraFieldName === 'Can donate' &&
-                        <>
-                            <Typography className={classes.canDonate}>Can donate</Typography>
-                            <Select native inputRef={register}>
-                                <option value={"true"} >True</option>
-                                <option value={"false"} >False</option>
-                            </Select>
-                        </>}
                     </Grid>
                 </Grid>
                 <Grid item>

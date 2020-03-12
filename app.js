@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const loginRouter = require('./routes/login');
 const nonstaffRouter = require('./routes/nonstaffRouter');
+const staffRouter = require('./routes/staffRouter');
 const path = require('path');
 
 const app = express();
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
-
+app.use("/api/staff", staffRouter);
 
 
 app.get('*', (req, res) => {
@@ -31,4 +32,3 @@ app.listen(port);
 console.log(`listening on ${port}`);
 
 module.exports = app;	
-
