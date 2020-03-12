@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const loginRouter = require('./routes/login');
 const nonstaffRouter = require('./routes/nonstaffRouter');
 const staffRouter = require('./routes/staffRouter');
+const requestRouter = require('./routes/requestRouter');
 const path = require('path');
 
 const app = express();
@@ -19,7 +20,12 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
+<<<<<<< HEAD
 app.use("/api/staff", staffRouter);
+=======
+app.use("/api/request-blood", requestRouter);
+
+>>>>>>> 820f86c2b0603beedd61c621bf54364e9a5368fa
 
 
 app.get('*', (req, res) => {

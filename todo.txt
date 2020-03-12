@@ -1,2 +1,7 @@
 - add build to gitignore? to test locally
-- im here
+
+- Add Patients: do we really need to assign an ID to a patient every time time we add them
+    or we can make the database automatically set the ID for the patient that has not been
+    assigned yet (eg. we do not assign a transaction number to a request directly)?
+
+- Request: patient ID, admin ID, Blood type, date, quantity
