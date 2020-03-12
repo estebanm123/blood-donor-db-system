@@ -40,9 +40,11 @@ const NurseView = (props) => {
                 break;
             case("Search"):
                 displayPanel = <Search />
+                title = `Search ${categoryName}`
                 break;
             case("Request"):
-                displayPanel = <Request />
+                displayPanel = <Request />;
+                title = `Request blood`;
                 break;
         }
     }

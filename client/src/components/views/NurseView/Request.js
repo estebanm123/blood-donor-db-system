@@ -48,16 +48,8 @@ const Request = (props) => {
     }
 
     let onSubmit = (data) => {
-        let dateOfBirth = document.querySelector('#date-picker-dialog').value;
-        if (props.categoryName === 'Donors') {
-            let select = document.querySelector('select'); // grab the only select in document - refactor if you add more
-            data['canDonate'] = select.value;
-        }
-
-        data['birthdate'] = dateOfBirth;
-        data['category'] = props.categoryName;
-
-        fetch(`/api/nonstaff/add`, {
+        console.log(data);
+        fetch(`/api/request-blood/add`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(data)
@@ -92,17 +84,17 @@ const Request = (props) => {
                     <Grid container justify={"space-evenly"} alignItems={"center"}>
                         <Grid item>
                             <TextField name={"Patient ID"}
-                                       error={errors.PatientID}
+                                       error={errors["Patient ID"]}
                                        inputRef={register({ required: true, maxLength: 8 })}
                                        label={"Patient ID"}
-                                       helperText={errors.ID? "Required. 8 chars max." : "Required"}/>
+                                       helperText={errors["Patient ID"]? "Required. 8 chars max." : "Required"}/>
                         </Grid>
                         <Grid item>
-                            <TextField name={"Admin ID "}
-                                       error={errors.AdminID}
+                            <TextField name={"Admin ID"}
+                                       error={errors["Admin ID"]}
                                        inputRef={register({ required: true, maxLength: 8 })}
                                        label={"Admin ID"}
-                                       helperText={errors.AdminID? "Required. 8 chars max." : "Required"}/>
+                                       helperText={errors["Admin ID"]? "Required. 8 chars max." : "Required"}/>
                         </Grid>
                         <Grid item className={classes.date}>
                             {/* ripped from mui for nice date picker*/}
@@ -126,17 +118,17 @@ const Request = (props) => {
                     <Grid container justify={"space-evenly"} alignItems={"center"}>
                         <Grid item>
                             <TextField name={"Blood Type"}
-                                       error={errors.BloodType}
+                                       error={errors["Blood Type"]}
                                        inputRef={register({ required: true, maxLength: 2})}
                                        label={"Blood Type"}
-                                       helperText={errors.BloodType? "Required. 2 digits max." : "Required"}/>
+                                       helperText={errors["Blood Type"]? "Required. 2 digits max." : "Required"}/>
                         </Grid>
                         <Grid item>
                             <TextField name={"Quantity"}
                                        error={errors.Quantity}
                                        inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                        label={"Quantity mL"}
-                                       helperText={errors.Quantity? "Required. Positive Integer.  " : "Required"}/>
+                                       henpmlperText={errors.Quantity? "Required. Positive Integer.  " : "Required"}/>
                         </Grid>
                     </Grid>
                     <Grid item>

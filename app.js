@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const loginRouter = require('./routes/login');
 const nonstaffRouter = require('./routes/nonstaffRouter');
+const requestRouter = require('./routes/requestRouter');
 const path = require('path');
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
+app.use("/api/request-blood", requestRouter);
 
 
 
