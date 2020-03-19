@@ -35,7 +35,7 @@ const App = () => {
 	let view;
 	switch (curUser.userType) {
 		case ('Nurse'):
-			view = <NurseView handleLogout={handleLogout} name={name}/>;
+			view = <NurseView handleLogout={handleLogout} name={name} id={curUser.id}/>;
 			break;
 		case ('Admin'):
 			view = <AdminView handleLogout={handleLogout} name={name}/>;
