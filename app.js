@@ -20,12 +20,9 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
-<<<<<<< HEAD
 app.use("/api/staff", staffRouter);
-=======
 app.use("/api/request-blood", requestRouter);
 
->>>>>>> 820f86c2b0603beedd61c621bf54364e9a5368fa
 
 
 app.get('*', (req, res) => {

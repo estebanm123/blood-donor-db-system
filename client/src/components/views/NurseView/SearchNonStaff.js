@@ -29,6 +29,10 @@ const SearchNonStaff = (props) => {
         }
     });
 
+    let submitReload = () => {
+        onSubmit(); // TODO: fully match search
+    };
+
     let onSubmit = (event) => {
         fetch(`/api/nonstaff/search`, {
             method: 'POST',
@@ -56,7 +60,7 @@ const SearchNonStaff = (props) => {
                <Button variant={"contained"} onClick={handleSubmit(onSubmit)} className={classes["viewall"]}>View all</Button>
            </Grid>
            <Grid item>
-                <SearchTableNonStaff rows={results} categoryName={props.categoryName} />
+                <SearchTableNonStaff rows={results} categoryName={props.categoryName} submitReload={submitReload}/>
            </Grid>
            {error && <Typography>error</Typography>}
        </Grid>
