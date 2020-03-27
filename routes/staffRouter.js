@@ -29,6 +29,7 @@ router.post('/add', function(req, res, next) {
 	.then( () => {
           client.end();
           res.json("Add successful");
+<<<<<<< HEAD
 
 	})
 	.catch( (err) => {
@@ -36,6 +37,17 @@ router.post('/add', function(req, res, next) {
         next(err);
         return;
     });
+=======
+	})
+	.catch( (err) => {
+        console.error(err);
+        // TODO delete nonstaff entry [which should delete healthinfohasa]
+       // res.json(new Error("Failed to add staff."));
+        next(err);
+        return;
+    });
+    
+>>>>>>> a28420a39db79ed561fc19eb5de0e4183dd314f7
   
 });
 

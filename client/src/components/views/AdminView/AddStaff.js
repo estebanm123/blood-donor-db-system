@@ -45,7 +45,7 @@ const AddStaff = (props) => {
 
     let onSubmit = (data) => {       
         data['category'] = props.categoryName;
-        console.log(data);
+       // console.log(data);
 
         fetch(`/api/staff/add`, {
             method: 'POST',
@@ -53,6 +53,7 @@ const AddStaff = (props) => {
             body: JSON.stringify(data)
         })
             .then((res) => {
+                console.log(res);
                 return res.json();
             })
             .then((res) => {

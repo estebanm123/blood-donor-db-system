@@ -35,6 +35,22 @@ router.post('/add', function(req, res, next) {
 
 
         // add requests
+        let date = `${req.body.date.substring(6)}-${req.body.date.substring(3,5)}-${req.body.date.substring(0,2)}`;
+
+        client.query(`insert into requests values (
+            '${req.body['Admin ID']}'::char(8), 
+            '${req.body['nurse id']}'::char(8), 
+            ${transactionnum}::integer,
+            '${date}'::date`)
+
+            .then( (results) => {
+                console.log(results.rows);
+            })
+            .catch( (err) => {
+                console.error(err);
+                res.json(new Error("Failed to add request."));
+                return;
+            });
     })
     .catch( (err) => {
         console.error(err);

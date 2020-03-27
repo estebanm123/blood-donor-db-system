@@ -60,9 +60,14 @@ router.post('/add', function(req, res, next) {
 
     client.query(`insert into ${table} values ${values}`)
 	.then( () => {
+<<<<<<< HEAD
           client.end();    
           res.json("Add successful");
 
+=======
+          client.end();
+          res.json("Add successful");
+>>>>>>> a28420a39db79ed561fc19eb5de0e4183dd314f7
 	})
 	.catch( (err) => {
         console.error(err);
@@ -73,5 +78,89 @@ router.post('/add', function(req, res, next) {
     
   
 });
+
+
+router.post('/search', function(req, res, next) {    
+	const client = new Client({
+	  connectionString: process.env.DATABASE_URL,
+	  ssl:				true,
+	});
+
+	client.connect();
+       
+    let query;
+    if (req.body.catName === "Patients") {
+        query = `select * from nonstaff n, healthinfohasa h, recipient r 
+        where r.recipientid = n.id and n.id = h.nonstaffid`;
+    } else {
+        query = `select * from nonstaff n, healthinfohasa h, donor d
+        where d.donorid = n.id and n.id = h.nonstaffid`
+    }
+
+	client.query(query)
+	.then( (results) => {
+          client.end();
+          if (results.rows.length !== 0) {
+            res.json(JSON.stringify(results.rows));
+          } else {
+              res.json("[]");
+          }
+
+	})
+	.catch( (err) => {
+        console.error(err);
+       next(err);
+	});
+    
+  
+});
+
+
+
+router.post('/edit', function(req, res, next) {    
+	const client = new Client({
+	  connectionString: process.env.DATABASE_URL,
+	  ssl:				true,
+	});
+
+	client.connect();
+    
+
+    let query = "";
+    for (let key of Object.keys(req.body)) {
+        switch (key) {
+            case ('Name'):
+            case ('Email'):
+            case ('Phone'):
+                query += `update nonstaff set ${key} = '${req.body[key]}' where id = '${req.body.id}';`;
+                break;
+            case ('amountRequired'):
+                query += `update recipient set amtRequired = '${req.body[key]}' where recipientid = '${req.body.id}';`;
+                break;
+            case ('canDonate'):
+                query += `update donor set canDonate =  '${req.body[key]}' where donorid = '${req.body.id}';`;
+                break;
+            case ('BloodType'):
+            case ('Height'):
+            case ('Weight'):
+                query += `update healthinfohasa set ${key} = '${req.body[key]}' where nonstaffid = '${req.body.id}';`;
+                break;
+        }
+    }
+	client.query(query)
+	.then( (results) => {
+        client.end();
+        res.json("edit sucessful")
+
+	})
+	.catch( (err) => {
+        console.error(err);
+       next(err);
+	});
+    
+  
+});
+
+
 
 module.exports = router;

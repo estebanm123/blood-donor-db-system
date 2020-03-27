@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import WelcomePanel from "../../menuGenerics/WelcomePanel";
 import AddNonStaff from "./AddNonStaff";
 import MainPanel from "../../menuGenerics/MainPanel";
-import Search from "./Search";
+import SearchNonStaff from "./SearchNonStaff";
 import Request from "./Request";
 
 
@@ -39,11 +39,11 @@ const NurseView = (props) => {
                 title = `Add ${categoryName}`;
                 break;
             case("Search"):
-                displayPanel = <Search />
+                displayPanel = <SearchNonStaff categoryName={categoryName}/>
                 title = `Search ${categoryName}`
                 break;
             case("Request"):
-                displayPanel = <Request />;
+                displayPanel = <Request categoryName={categoryName} id={props.id}/>;
                 title = `Request blood`;
                 break;
         }

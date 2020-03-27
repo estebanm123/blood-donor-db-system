@@ -76,7 +76,7 @@ const AddNonStaff = (props) => {
                 console.error(err);
                 setApiError('Error submitting request.');
             });
-    }
+    };
     let display;
     if (addSuccessful) {
         let categoryNameSingular = props.categoryName.substring(0, props.categoryName.length - 1);

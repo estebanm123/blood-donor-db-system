@@ -23,6 +23,11 @@ app.use("/api/nonstaff", nonstaffRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/request-blood", requestRouter);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a28420a39db79ed561fc19eb5de0e4183dd314f7
 app.get('*', (req, res) => {
 res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });

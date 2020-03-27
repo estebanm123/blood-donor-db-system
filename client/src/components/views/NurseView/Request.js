@@ -48,6 +48,7 @@ const Request = (props) => {
     }
 
     let onSubmit = (data) => {
+        data['nurse id'] = props.id;
         console.log(data);
         fetch(`/api/request-blood/add`, {
             method: 'POST',
