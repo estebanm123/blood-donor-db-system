@@ -20,53 +20,33 @@ router.post('/add', function(req, res, next) {
         }
 
         client.query(`insert into request values (
-            ${transactionnum}::integer, 
+            '${transactionnum}'::integer, 
             '${req.body['Blood Type']}'::char(64), 
-            ${req.body['Quantity']}::integer,
+            '${req.body['Quantity']}'::integer,
             '${req.body['Patient ID']}'::char(8))`)
         .then( (results) => {   
-            console.log(results.rows);
+            let curDate = new Date();
+            let dateAdded = `${curDate.getFullYear()}-${curDate.getMonth()}-${curDate.getDate()}`;
+            return client.query(`insert into requests values (
+                '${req.body['Admin ID']}'::char(8),
+                '${req.body['nurseID']}'::char(8), 
+                '${transactionnum}'::integer, 
+                '${dateAdded}'::date)`);
+        }).then( (results) => {
+            res.json("Add successful");
         })
         .catch( (err) => {
             console.error(err);
-            res.json(new Error("Failed to add request."));
+            next(err);
             return;
         });
-
-
-        // add requests
-        let date = `${req.body.date.substring(6)}-${req.body.date.substring(3,5)}-${req.body.date.substring(0,2)}`;
-
-        client.query(`insert into requests values (
-            '${req.body['Admin ID']}'::char(8), 
-            '${req.body['nurse id']}'::char(8), 
-            ${transactionnum}::integer,
-            '${date}'::date`)
-
-            .then( (results) => {
-                console.log(results.rows);
-            })
-            .catch( (err) => {
-                console.error(err);
-                res.json(new Error("Failed to add request."));
-                return;
-            });
     })
     .catch( (err) => {
         console.error(err);
-        res.json(new Error("Failed to add request."));
+        res.json(new Error("Failed to add request to requests table."));
+        next(err);
         return;
     });
-
-
-
-    
-   
-
-
-
-
-    res.json("Add successful");
   
 });
 

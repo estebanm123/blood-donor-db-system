@@ -37,19 +37,22 @@ const Request = (props) => {
     const [apiError, setApiError] = useState('');
     const [addSuccessful, setAddSuccessful] = useState(false);
 
-    // below 3 lines ripped from MUI to make date look nice
-    const [selectedDate, setSelectedDate] = React.useState(new Date('1900-01-02'));
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-    };
+    // // below 3 lines ripped from MUI to make date look nice
+    // const [selectedDate, setSelectedDate] = React.useState(new Date('1900-01-02'));
+    // const handleDateChange = (date) => {
+    //     setSelectedDate(date);
+    // };
 
     let handleAddAnother = () => {
         setAddSuccessful(false);
     }
 
     let onSubmit = (data) => {
-        data['nurse id'] = props.id;
-        console.log(data);
+        console.log('before modifying: ' + JSON.stringify(data));
+        data.nurseID = props.id;
+        console.log('prop id: ' + props.id);
+        console.log('data: ' + data);
+        // data['nurse id'] = props.id;
         fetch(`/api/request-blood/add`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
@@ -68,14 +71,13 @@ const Request = (props) => {
     }
     let display;
     if (addSuccessful) {
-        let categoryNameSingular = props.categoryName.substring(0, props.categoryName.length - 1);
         display =
             <Grid container direction={"column"} justify={"space-evenly"} alignItems={"center"}>
                 <Grid item>
-                    <Typography>{categoryNameSingular} successfully added.</Typography>
+                    <Typography>Request successfully added.</Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant={"contained"} onClick={handleAddAnother}>Add another {categoryNameSingular}</Button>
+                    <Button variant={"contained"} onClick={handleAddAnother}>Add another Request</Button>
                 </Grid>
             </Grid>
     } else {
@@ -96,33 +98,16 @@ const Request = (props) => {
                                        inputRef={register({ required: true, maxLength: 8 })}
                                        label={"Admin ID"}
                                        helperText={errors["Admin ID"]? "Required. 8 chars max." : "Required"}/>
-                        </Grid>
-                        <Grid item className={classes.date}>
-                            {/* ripped from mui for nice date picker*/}
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <KeyboardDatePicker
-                                    inputRef = {register}
-                                    className={classes.date}
-                                    margin="normal"
-                                    id="date-picker-dialog"
-                                    label="Date"
-                                    format="MM/dd/yyyy"
-                                    value={selectedDate}
-                                    onChange={handleDateChange}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date',
-                                    }}
-                                />
-                            </MuiPickersUtilsProvider>
+
                         </Grid>
                     </Grid>
                     <Grid container justify={"space-evenly"} alignItems={"center"}>
                         <Grid item>
                             <TextField name={"Blood Type"}
                                        error={errors["Blood Type"]}
-                                       inputRef={register({ required: true, maxLength: 2})}
+                                       inputRef={register({ required: true, maxLength: 3})}
                                        label={"Blood Type"}
-                                       helperText={errors["Blood Type"]? "Required. 2 digits max." : "Required"}/>
+                                       helperText={errors["Blood Type"]? "Required. 3 digits max." : "Required"}/>
                         </Grid>
                         <Grid item>
                             <TextField name={"Quantity"}
