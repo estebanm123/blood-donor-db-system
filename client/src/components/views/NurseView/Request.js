@@ -110,11 +110,13 @@ const Request = (props) => {
                                        helperText={errors["Blood Type"]? "Required. 3 digits max." : "Required"}/>
                         </Grid>
                         <Grid item>
-                            <TextField name={"Quantity"}
-                                       error={errors.Quantity}
-                                       inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
-                                       label={"Quantity mL"}
-                                       henpmlperText={errors.Quantity? "Required. Positive Integer.  " : "Required"}/>
+                        <Grid item>
+                        <TextField name={"Quantity"}
+                                   error={errors.Quantity}
+                                   inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
+                                   label={"Quantity mL"}
+                                   helperText={errors.Quantity? "Required. Positive Integer." : "Required"}/>
+                    </Grid>
                         </Grid>
                     </Grid>
                     <Grid item>
