@@ -60,14 +60,8 @@ router.post('/add', function(req, res, next) {
 
     client.query(`insert into ${table} values ${values}`)
 	.then( () => {
-<<<<<<< HEAD
-          client.end();    
-          res.json("Add successful");
-
-=======
           client.end();
           res.json("Add successful");
->>>>>>> a28420a39db79ed561fc19eb5de0e4183dd314f7
 	})
 	.catch( (err) => {
         console.error(err);

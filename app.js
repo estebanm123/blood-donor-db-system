@@ -4,6 +4,7 @@ const loginRouter = require('./routes/login');
 const nonstaffRouter = require('./routes/nonstaffRouter');
 const staffRouter = require('./routes/staffRouter');
 const requestRouter = require('./routes/requestRouter');
+const labRouter = require('./routes/labRouter');
 const path = require('path');
 
 const app = express();
@@ -22,12 +23,9 @@ app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/request-blood", requestRouter);
-
-<<<<<<< HEAD
-=======
+app.use("/api/lab", labRouter);
 
 
->>>>>>> a28420a39db79ed561fc19eb5de0e4183dd314f7
 app.get('*', (req, res) => {
 res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
