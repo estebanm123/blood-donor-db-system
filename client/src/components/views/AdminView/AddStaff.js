@@ -56,23 +56,26 @@ const AddStaff = (props) => {
                 return res.json();
             })
             .then((res) => {
+                console.log(res);
                 setAddSuccessful(true);
             })
-            .catch((err) => {
+            
+            .catch((err) => { 
                 console.error(err);
                 setApiError('Error submitting request.');
             });
     }
+
+
     let display;
     if (addSuccessful) {
-        let categoryNameSingular = props.categoryName.substring(0, props.categoryName.length - 1);
         display =
             <Grid container direction={"column"} justify={"space-evenly"} alignItems={"center"}>
                 <Grid item>
-                    <Typography>{categoryNameSingular} successfully added.</Typography>
+                    <Typography>{props.categoryName} successfully added.</Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant={"contained"} onClick={handleAddAnother}>Add another {categoryNameSingular}</Button>
+                    <Button variant={"contained"} onClick={handleAddAnother}>Add another {props.categoryName}</Button>
                 </Grid>
             </Grid>
     } else {

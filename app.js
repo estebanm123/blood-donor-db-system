@@ -20,13 +20,8 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
-<<<<<<< HEAD
 app.use("/api/staff", staffRouter);
-=======
 app.use("/api/request-blood", requestRouter);
-
->>>>>>> 820f86c2b0603beedd61c621bf54364e9a5368fa
-
 
 app.get('*', (req, res) => {
 res.sendFile(path.join(__dirname+'/client/build/index.html'));
@@ -36,5 +31,4 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 
 console.log(`listening on ${port}`);
-
 module.exports = app;	

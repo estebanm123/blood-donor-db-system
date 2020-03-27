@@ -28,15 +28,14 @@ router.post('/add', function(req, res, next) {
     client.query(`insert into ${table} values ${values}`)
 	.then( () => {
           client.end();
+          res.json("Add successful");
+
 	})
 	.catch( (err) => {
-        console.error(err);
-        // TODO delete nonstaff entry [which should delete healthinfohasa]
-        res.json(new Error("Failed to add staff."));
+        console.log('error in insert into query');
+        next(err);
         return;
     });
-    
-    res.json("Add successful");
   
 });
 
