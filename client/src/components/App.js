@@ -4,6 +4,7 @@ import Login from './login/Login'
 import { makeStyles } from '@material-ui/core/styles';
 import NurseView from "./views/NurseView/NurseView";
 import AdminView from "./views/AdminView/AdminView";
+import LabView from "./views/LabView/LabView";
 
 
 const styles = makeStyles(theme => ({
@@ -16,7 +17,7 @@ const App = () => {
 
 	const classes = styles();
 	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	const [curUser, setCurUser] = useState({userType: 'Admin'}); // set to empty obj
+	const [curUser, setCurUser] = useState({userType: 'Lab'}); // set to empty obj
 
 
 	const handleLogin = (user) => {
@@ -40,6 +41,8 @@ const App = () => {
 		case ('Admin'):
 			view = <AdminView handleLogout={handleLogout} name={name}/>;
 			break;
+		case ('Lab'):
+			view = <LabView handleLogout={handleLogout} name={name}/>
 	}
 
 
