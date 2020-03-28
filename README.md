@@ -15,7 +15,7 @@ Setup:
 
 And you'd need to set the environment variable DATABASE_URL. 
 
-To run locally:
+To run locally (from root directory):
 - run the following commands:
 
       cd client
