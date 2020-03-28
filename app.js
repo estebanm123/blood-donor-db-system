@@ -5,6 +5,7 @@ const nonstaffRouter = require('./routes/nonstaffRouter');
 const staffRouter = require('./routes/staffRouter');
 const requestRouter = require('./routes/requestRouter');
 const transfusionRouter = require('./routes/transfusionRouter');
+const labRouter = require('./routes/labRouter');
 const path = require('path');
 
 const app = express();
@@ -24,7 +25,7 @@ app.use("/api/nonstaff", nonstaffRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/request-blood", requestRouter);
 app.use("/api/transfusion", transfusionRouter);
-
+app.use("/api/lab", labRouter);
 
 
 app.get('*', (req, res) => {
@@ -35,5 +36,4 @@ const port = process.env.PORT || 5000;
 app.listen(port);
 
 console.log(`listening on ${port}`);
-
 module.exports = app;	

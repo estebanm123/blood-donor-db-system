@@ -44,7 +44,7 @@ const NurseView = (props) => {
                 title = `Search ${categoryName}`
                 break;
             case("Request"):
-                displayPanel = <Request />;
+                displayPanel = <Request categoryName={categoryName} id={props.id}/>;
                 title = `Request blood`;
                 break;
             case("Transfusion"):
