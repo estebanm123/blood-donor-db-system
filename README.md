@@ -2,7 +2,7 @@
 
 Hosted at : http://blood-donor-system.herokuapp.com/ (doesn't work properly right now)
 
-Requires node installed. 
+Requires node and yarn installed. 
 
 Setup:
 - run the following commands:
