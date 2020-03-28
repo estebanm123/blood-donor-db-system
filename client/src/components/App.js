@@ -16,8 +16,8 @@ const styles = makeStyles(theme => ({
 const App = () => {
 
 	const classes = styles();
-	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	const [curUser, setCurUser] = useState({userType: 'Nurse'}); // set to empty obj //userType: 'Nurse'
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // set to FALSE
+	const [curUser, setCurUser] = useState({userType: ''}); // set to empty obj //userType: 'Nurse'
 
 
 	const handleLogin = (user) => {
@@ -36,7 +36,7 @@ const App = () => {
 	let view;
 	switch (curUser.userType) {
 		case ('Nurse'):
-			view = <NurseView handleLogout={handleLogout} name={name} id={"200"}/>; //set to curUser.id
+			view = <NurseView handleLogout={handleLogout} name={name} id={curUser.id}/>; //set to curUser.id
 			break;
 		case ('Admin'):
 			view = <AdminView handleLogout={handleLogout} name={name}/>;
