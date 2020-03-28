@@ -11,7 +11,7 @@ Setup:
 
       cd client
 
-      npm i
+      yarn install
 
 And you'd need to set the environment variable DATABASE_URL. 
 
