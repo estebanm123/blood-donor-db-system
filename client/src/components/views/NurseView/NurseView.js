@@ -6,6 +6,7 @@ import AddNonStaff from "./AddNonStaff";
 import MainPanel from "../../menuGenerics/MainPanel";
 import SearchNonStaff from "./SearchNonStaff";
 import Request from "./Request";
+import Transfusion from "./Transfusion";
 
 
 const styles = makeStyles(theme => ({
@@ -46,6 +47,10 @@ const NurseView = (props) => {
                 displayPanel = <Request />;
                 title = `Request blood`;
                 break;
+            case("Transfusion"):
+                displayPanel = <Transfusion id={props.id} />;
+                title = `Log Transfusion`;
+                break;
         }
     }
 
@@ -53,7 +58,7 @@ const NurseView = (props) => {
 
         return (
         <MainPanel
-            categories={[{'Patients': ['Add', 'Search', 'Request']}, {'Donors': ['Add', 'Search', 'Donation']}]}
+            categories={[{'Patients': ['Add', 'Search', 'Request', 'Transfusion']}, {'Donors': ['Add', 'Search', 'Donation']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
             displayPanel={displayPanel}

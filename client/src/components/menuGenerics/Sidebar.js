@@ -88,35 +88,43 @@ const Sidebar = (props) => {
 
 
     const handleCatClick = (event) => {
-        //janky workaround for clicking sidebar links
+        // janky workaround for clicking sidebar links
         let inactiveSubCatsClass;
-        console.log(document.querySelector('.makeStyles-subCatsInactive-11'));
         if (document.querySelector('.makeStyles-subCatsInactive-11') !== null) {
             inactiveSubCatsClass = 'makeStyles-subCatsInactive-11';
         } else if (document.querySelector('.jss11')) {
             inactiveSubCatsClass = 'jss11';
-        } else {
+        } else if (document.querySelector('.jss294')) {
             inactiveSubCatsClass = 'jss294';
+        } else {
+            inactiveSubCatsClass = 'jss300';
         }
 
         let subCats = event.currentTarget.parentElement.querySelector('.' + inactiveSubCatsClass);
-        console.log(inactiveSubCatsClass);
-        console.log(document.querySelector('.makeStyles-subCatsInactive-11'));
-       // console.log(event.currentTarget.parentElement.children[1].classList);
-        // console.log(subCats.classList.contains(inactiveSubCatsClass));
+        console.log(subCats);
         if (subCats && subCats.classList.contains(inactiveSubCatsClass)) { // if found and is inactive
-            let currentlySelected = event.currentTarget.parentElement.parentElement.parentElement.querySelector('.subCatsActive');
-            if (currentlySelected && currentlySelected !== subCats) {
-                currentlySelected.classList.add(inactiveSubCatsClass);
-            }
             subCats.classList.remove(inactiveSubCatsClass);
-       }
+            let allSubCats = subCats.parentElement.parentElement.parentElement.querySelectorAll('ul');
+            for (let list of allSubCats) {
+                if (list !== subCats && !list.classList.contains(inactiveSubCatsClass)) {
+                    list.classList.add(inactiveSubCatsClass);
+                   // let allSubCatsItems = list.querySelectorAll('div[role="button"]');
+                    const unselectedClass = document.querySelector('.makeStyles-unselected-16')? 'makeStyles-unselected-16' :
+                        document.querySelector('.jss16')? 'jss16' : document.querySelector('.jss304')? 'jss304': 'jss299';
+
+                    if (props.curSelected) props.curSelected.classList.add(unselectedClass);
+                }
+            }
+
+            props.handleSelect(null);
+
+        }
     }
 
     const handleSubCatClick = (event) => {
         const unselectedClass = document.querySelector('.makeStyles-unselected-16')? 'makeStyles-unselected-16' :
-            document.querySelector('.jss16')? 'jss16' : 'jss299';
-        ;
+            document.querySelector('.jss16')? 'jss16' : document.querySelector('.jss304')? 'jss304': 'jss299';
+
 
         if (!props.curSelected || (props.curSelected && props.curSelected !== event.currentTarget)) {
             event.currentTarget.classList.remove(unselectedClass);

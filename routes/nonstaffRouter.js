@@ -17,30 +17,35 @@ router.post('/add', function(req, res, next) {
     '${req.body.Email}'::char(64), 
     '${req.body.Phone}'::char(10),
     '${req.body.Name}'::char(64))`)
-	.then( () => {
+	.then( (results) => {
+        // add healthInfo
+        let curDate = new Date();
+        let dateAdded = `${curDate.getFullYear()}-${curDate.getMonth()}-${curDate.getDate()}`;
+        let birthDate = `${req.body.birthdate.substring(6)}-${req.body.birthdate.substring(3,5)}-${req.body.birthdate.substring(0,2)}`;
 
+        return client.query(`insert into healthinfohasa values 
+        ('${dateAdded}'::date, 
+        '${req.body.ID}'::char(8), 
+        '${birthDate}'::date,
+        '${req.body.Height}'::integer,
+        '${req.body.Weight}'::integer,
+        '${req.body.BloodType}'::char(6))`)
 	})
-	.catch( (err) => {
-        console.error(err);
-        res.json(new Error("Failed to add nonstaff."));
-        return;
-	});
-    
-
-    // add healthInfo
-    let curDate = new Date();
-    let dateAdded = `${curDate.getFullYear()}-${curDate.getMonth()}-${curDate.getDate()}`;
-    let birthDate = `${req.body.birthdate.substring(6)}-${req.body.birthdate.substring(3,5)}-${req.body.birthdate.substring(0,2)}`;
-
-    client.query(`insert into healthinfohasa values 
-    ('${dateAdded}'::date, 
-    '${req.body.ID}'::char(8), 
-    '${birthDate}'::date,
-    '${req.body.Height}'::integer,
-    '${req.body.Weight}'::integer,
-    '${req.body.BloodType}'::char(6))`)
-	.then( () => {
-	})
+	.then( (results) => {
+        // add patient/ recipient
+        if (req.body.category === "Patients") {
+            table = 'recipient';
+            values = `('${req.body.ID}'::char(8), ${req.body['Amount Required ml']}::integer)`;
+        } else {
+            table = 'donor';
+            values = `('${req.body.ID}'::char(8), ${req.body['canDonate'].toLowerCase()}::boolean)`;
+        }
+        return client.query(`insert into ${table} values ${values}`)
+    })
+    .then( (results) => {
+        client.end();
+        res.json("Add successful");
+    })
 	.catch( (err) => {
         console.error(err);
         // TODO delete nonstaff entry
@@ -49,26 +54,6 @@ router.post('/add', function(req, res, next) {
     });
     
 
-    // add patient/ recipient
-    if (req.body.category === "Patients") {
-        table = 'recipient';
-        values = `('${req.body.ID}'::char(8), ${req.body['Amount Required ml']}::integer)`;
-    } else {
-        table = 'donor';
-        values = `('${req.body.ID}'::char(8), ${req.body['canDonate'].toLowerCase()}::boolean)`;
-    }
-
-    client.query(`insert into ${table} values ${values}`)
-	.then( () => {
-          client.end();
-          res.json("Add successful");
-	})
-	.catch( (err) => {
-        console.error(err);
-        // TODO delete nonstaff entry [which should delete healthinfohasa]
-        res.json(new Error("Failed to add nonstaff."));
-        return;
-    });
     
   
 });
@@ -141,6 +126,7 @@ router.post('/edit', function(req, res, next) {
                 break;
         }
     }
+    
 	client.query(query)
 	.then( (results) => {
         client.end();
@@ -152,9 +138,7 @@ router.post('/edit', function(req, res, next) {
        next(err);
 	});
     
-  
+
 });
-
-
 
 module.exports = router;

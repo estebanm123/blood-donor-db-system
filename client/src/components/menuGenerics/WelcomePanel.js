@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
@@ -25,16 +25,21 @@ const WelcomePanel = (props) => {
 
     const classes = styles();
 
+    useEffect(()=> {
+        return () => {
+        }
+    }, []);
+
     return (
         <Grid container direction={"column"} justify={"center"} alignItems={"center"} className={classes.root}>
            <Grid item>
                <Typography className={classes.title}>Welcome {props.name}</Typography>
            </Grid>
            <Grid item className={classes.clock}>
-               <Clock
+               {<Clock
                format={'HH:mm:ss'}
                ticking={true}
-               />
+               />}
            </Grid>
 
         </Grid>

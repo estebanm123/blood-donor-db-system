@@ -38,6 +38,7 @@ router.post('/add', function(req, res, next) {
     })
     .catch( (err) => {
         console.error(err);
+        client.end();
         res.json(new Error("Failed to add request."));
         return;
     });

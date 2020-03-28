@@ -4,6 +4,7 @@ const loginRouter = require('./routes/login');
 const nonstaffRouter = require('./routes/nonstaffRouter');
 const staffRouter = require('./routes/staffRouter');
 const requestRouter = require('./routes/requestRouter');
+const transfusionRouter = require('./routes/transfusionRouter');
 const path = require('path');
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api/login", loginRouter);
 app.use("/api/nonstaff", nonstaffRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/request-blood", requestRouter);
+app.use("/api/transfusion", transfusionRouter);
 
 
 
