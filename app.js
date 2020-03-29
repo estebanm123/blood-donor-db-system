@@ -6,6 +6,8 @@ const staffRouter = require('./routes/staffRouter');
 const requestRouter = require('./routes/requestRouter');
 const transfusionRouter = require('./routes/transfusionRouter');
 const labRouter = require('./routes/labRouter');
+const donationRouter = require('./routes/donationRouter');
+
 const path = require('path');
 
 const app = express();
@@ -26,6 +28,7 @@ app.use("/api/staff", staffRouter);
 app.use("/api/request-blood", requestRouter);
 app.use("/api/transfusion", transfusionRouter);
 app.use("/api/lab", labRouter);
+app.use("/api/donation", donationRouter);
 
 
 app.get('*', (req, res) => {

@@ -4,3 +4,5 @@
     or we can make the database automatically set the ID for the patient that has not been
     assigned yet (eg. we do not assign a transaction number to a request directly)?
 
+- for blood types, should we reject if the input blood type is not a real blood type?
+

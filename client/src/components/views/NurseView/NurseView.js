@@ -7,6 +7,7 @@ import MainPanel from "../../menuGenerics/MainPanel";
 import SearchNonStaff from "./SearchNonStaff";
 import Request from "./Request";
 import Transfusion from "./Transfusion";
+import Donation from "./Donation";
 
 
 const styles = makeStyles(theme => ({
@@ -50,6 +51,10 @@ const NurseView = (props) => {
             case("Transfusion"):
                 displayPanel = <Transfusion id={props.id} />;
                 title = `Log Transfusion`;
+                break;
+            case("Donation"):
+                displayPanel = <Donation id={props.id}/>;
+                title = 'Add Donation';
                 break;
         }
     }
