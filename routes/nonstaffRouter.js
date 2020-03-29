@@ -66,21 +66,52 @@ router.post('/search', function(req, res, next) {
 	});
 
 	client.connect();
-       
+    let cols = "";
+    for (let col of req.body.extraFields) {
+        switch (col) {
+            case("Blood Type"): 
+                col = "bloodtype";
+                break;
+            case("Amount Required"):
+                col = "amtrequired";
+                break;
+            case("Valid"):
+                col = "candonate";
+                break;
+            default:
+                col = col.toLowerCase();
+        }
+        cols += ( ", " + col );
+        console.log(cols);
+    }
+
+
+    let target = req.body.field;
+    switch(target) {
+        case("Blood Type"):
+            target = "bloodtype";
+            break;
+        default:
+            target = target.toLowerCase();
+    }
+
     let query;
     if (req.body.catName === "Patients") {
-        query = `select * from nonstaff n, healthinfohasa h, recipient r 
-        where r.recipientid = n.id and n.id = h.nonstaffid`;
+        query = `select n.id${cols} from nonstaff n, healthinfohasa h, recipient r 
+        where r.recipientid = n.id and n.id = h.nonstaffid and ${target} like '%${req.body.searchInput}%'`;
     } else {
-        query = `select * from nonstaff n, healthinfohasa h, donor d
-        where d.donorid = n.id and n.id = h.nonstaffid`
+        query = `select n.id${cols} from nonstaff n, healthinfohasa h, donor d
+        where d.donorid = n.id and n.id = h.nonstaffid and ${target} like '%${req.body.searchInput}%'`;
     }
+    console.log(query);
 
 	client.query(query)
 	.then( (results) => {
           client.end();
           if (results.rows.length !== 0) {
+            console.log(results.rows);
             res.json(JSON.stringify(results.rows));
+
           } else {
               res.json("[]");
           }

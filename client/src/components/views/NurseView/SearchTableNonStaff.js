@@ -80,60 +80,73 @@ const SearchTableNonStaff = (props) => {
     };
 
     let rows = props.rows;
+    let tableHeadings = (rows.length > 0)? <TableRow>
+        <TableCell>ID</TableCell>
+        {rows[0].name && <TableCell align="right">Name</TableCell>}
+        {rows[0].email && <TableCell align="right">Email</TableCell>}
+        {rows[0].phone && <TableCell align="right">Phone</TableCell>}
+        {rows[0].birthdate && <TableCell align="right">BirthDate</TableCell>}
+        {rows[0].height && <TableCell align="right">Height</TableCell>}
+        {rows[0].weight && <TableCell align="right">Weight</TableCell>}
+        {rows[0].bloodtype && <TableCell align="right">BloodType</TableCell>}
+        {rows[0].amtrequired && <TableCell align="right">Amount Required</TableCell>}
+        {rows[0].candonate && <TableCell align="right">Valid</TableCell>}
+
+    </TableRow> : null;
     let tableRows = rows.map(row => {
         let candonate = row.candonate;
         let displayRow;
+
         if (row.id === editRow) {
             displayRow = (<TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
-                <TableCell><TextField name={"Name"}
-                                      error={errors.Name}
-                                      inputRef={register({ required: true, maxLength: 64 })}
-                                      defaultValue={row.name.trim()}
-                                      className={classes["textfieldName"]}
-                                      helperText={errors.Name? "Required. 64 chars max." : ""}/>
-                </TableCell>
-                <TableCell align="right">
-                    <TextField name={"Email"}
-                               error={errors.Email}
-                               inputRef={register({ required: true, maxLength: 64 })}
-                               defaultValue={row.phone.trim()}
-                               className={classes["textfield"]}
-                               helperText={errors.Email? "Required. 64 chars max." : ""}/></TableCell>
-                <TableCell align="right"><TextField name={"Phone"}
+                {rows[0].name && <TableCell align="right"><TextField name={"Name"}
+                                                                     error={errors.Name}
+                                                                     inputRef={register({ required: true, maxLength: 64 })}
+                                                                     defaultValue={row.name.trim()}
+                                                                     className={classes["textfieldName"]}
+                                                                     helperText={errors.Name? "Required. 64 chars max." : ""}/>
+                </TableCell>}
+                {rows[0].email && <TableCell align="right"><TextField name={"Email"}
+                                             error={errors.Email}
+                                             inputRef={register({ required: true, maxLength: 64 })}
+                                             defaultValue={row.email.trim()}
+                                             className={classes["textfield"]}
+                                             helperText={errors.Email? "Required. 64 chars max." : ""}/>
+                </TableCell>}
+                {row[0].phone && <TableCell align="right"><TextField name={"Phone"}
                                                 error={errors.Phone}
                                                 inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                                 defaultValue={row.phone.trim()}
                                                 className={classes["textfield"]}
-                                                helperText={errors.Phone? "Required. 10 digits max." : ""}/></TableCell>
-                <TableCell align="right">{row.birthdate} </TableCell>
-                <TableCell align="right"><TextField name={"Height"}
+                                                helperText={errors.Phone? "Required. 10 digits max." : ""}/></TableCell>}
+                {row.birthdate && <TableCell align="right">{row.birthdate} </TableCell>}
+                {row.height && <TableCell align="right"><TextField name={"Height"}
                                                 error={errors.Height}
                                                 inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                                 defaultValue={row.height}
                                                 className={classes["textfield"]}
-                                                helperText={errors.Height? "Required. Positive Integer.  " : ""}/></TableCell>
-                <TableCell align="right"><TextField name={"Weight"}
+                                                helperText={errors.Height? "Required. Positive Integer.  " : ""}/></TableCell>}
+                {row.weight && <TableCell align="right"><TextField name={"Weight"}
                                               error={errors.Weight}
                                               inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                               className={classes["textfield"]}
                                               defaultValue={row.weight}
-                                              helperText={errors.Weight? "Required. Positive Integer." : ""}/></TableCell>
-               <TableCell align="right"><TextField name={"BloodType"}
+                                              helperText={errors.Weight? "Required. Positive Integer." : ""}/></TableCell>}
+                {row.bloodtype && <TableCell align="right"><TextField name={"BloodType"}
                                            error={errors.BloodType}
                                            className={classes["textfield"]}
                                            defaultValue={row.bloodtype.trim()}
                                            inputRef={register({ required: true, maxLength: 6 })}
-                                           helperText={errors.BloodType? "Required. Blood Type invalid." : ""}/></TableCell>
-                {candonate === undefined?
-                    <TableCell align="right"><TextField
+                                           helperText={errors.BloodType? "Required. Blood Type invalid." : ""}/></TableCell>}
+                    {row.amtrequired && <TableCell align="right"><TextField
                         error={errors['amountRequired']}
                         inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                         name={'amountRequired'}
                         defaultValue={row.amtrequired}
                         helperText={errors['amountRequired']? "Required. Positive Integer." : ""}
-                    /></TableCell>
-                    : <TableCell align="right"><>
+                    /></TableCell>}
+                    {(candonate !== undefined) && <TableCell align="right"><>
                         <Select native inputRef={register} defaultValue={candonate}>
                             <option value={"true"} >True</option>
                             <option value={"false"} >False</option>
@@ -146,16 +159,15 @@ const SearchTableNonStaff = (props) => {
         } else {
             displayRow = (<TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.phone}</TableCell>
-                <TableCell align="right">{row.birthdate}</TableCell>
-                <TableCell align="right">{row.height}</TableCell>
-                <TableCell align="right">{row.weight}</TableCell>
-                <TableCell align="right">{row.bloodtype}</TableCell>
-                {candonate === undefined?
-                    <TableCell align="right">{row.amtrequired}</TableCell>
-                    : <TableCell align="right">{candonate.toString()}</TableCell>}
+                {row.name && <TableCell align="right">{row.name}</TableCell>}
+                {row.email && <TableCell align="right">{row.email}</TableCell>}
+                {row.phone && <TableCell align="right">{row.phone}</TableCell>}
+                {row.birthdate && <TableCell align="right">{row.birthdate}</TableCell>}
+                {row.height && <TableCell align="right">{row.height}</TableCell>}
+                {row.weight && <TableCell align="right">{row.weight}</TableCell>}
+                {row.bloodtype && <TableCell align="right">{row.bloodtype}</TableCell>}
+                {row.amtrequired && <TableCell align="right">{row.amtrequired}</TableCell>}
+                {(row.candonate !== undefined) && <TableCell align="right">{row.candonate.toString()}</TableCell>}
 
                 <TableCell align="right">
                     {editRow?
@@ -173,19 +185,7 @@ const SearchTableNonStaff = (props) => {
 
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
-                            <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell align="right">Name</TableCell>
-                                <TableCell align="right">Email</TableCell>
-                                <TableCell align="right">Phone</TableCell>
-                                <TableCell align="right">BirthDate</TableCell>
-                                <TableCell align="right">Height</TableCell>
-                                <TableCell align="right">Weight</TableCell>
-                                <TableCell align="right">BloodType</TableCell>
-                                {props.categoryName === "Patients"?
-                                    <TableCell align="right">Amount Required</TableCell>
-                                    : <TableCell align="right">Can donate</TableCell>}
-                            </TableRow>
+                           {tableHeadings}
                         </TableHead>
                         <TableBody>
                             {tableRows}
