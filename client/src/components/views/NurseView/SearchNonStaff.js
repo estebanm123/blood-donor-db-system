@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { useForm } from 'react-hook-form';
 import SearchTableNonStaff from "./SearchTableNonStaff";
 import Paper from "@material-ui/core/Paper";
-import OptionMenu from "../../menuGenerics/OptionMenu";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -143,6 +142,9 @@ const SearchNonStaff = (props) => {
                         <Grid item>
                             <Button variant={"contained"} onClick={handleSearch} className={classes["viewall"]}>
                                 Search
+                            </Button>
+                            <Button variant={"contained"} onClick={handleSearch} className={classes["viewall"]}>
+                                Find most urgent Patient
                             </Button>
                         </Grid>
                     </Grid>

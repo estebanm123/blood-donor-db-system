@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import WelcomePanel from "../../menuGenerics/WelcomePanel";
-import AddNonStaff from "./AddNonStaff";
-import MainPanel from "../../menuGenerics/MainPanel";
-import SearchNonStaff from "./SearchNonStaff";
-import Request from "./Request";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -14,7 +9,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 
 
 const styles = makeStyles(theme => ({

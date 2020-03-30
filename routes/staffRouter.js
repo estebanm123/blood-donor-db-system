@@ -40,4 +40,32 @@ router.post('/add', function(req, res, next) {
   
 });
 
+router.get('/admin/stats/donors', function(req, res, next) {    
+	const client = new Client({
+	  connectionString: process.env.DATABASE_URL,
+	  ssl:				true,
+	});
+
+    client.connect();
+
+    client.query(`select donorid from donor x
+    where not exists ((select id from location) 
+                      except 
+                      (select n.locationid as id
+                       from nurse n, donationitem d 
+                       where n.id = d.nurseid and d.donorid = x.donorid) )`)
+	.then( (results) => {
+          client.end();
+          console.log(results.rows);
+          res.json(results.rows);
+	})
+	.catch( (err) => {
+        console.error(err);
+       // res.json(new Error("Failed to add staff."));
+        next(err);
+        return;
+    });
+  
+});
+
 module.exports = router;
