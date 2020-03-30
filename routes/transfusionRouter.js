@@ -37,12 +37,17 @@ router.post('/delete', function(req, res, next) {
 
     let tnum = req.body.tnum;
     client.query(`delete from respondsto where transactionnumber = '${tnum}';`)
+    .then (() => {
+        let curDate = new Date();
+        let dateAdded = `${curDate.getFullYear()}-${curDate.getMonth()}-${curDate.getDate()}`;
+          return client.query(`insert into transfusion values ('${Math.random().toString(36).substr(2, 8)}', '${req.body.patientid}', '${req.body.nurseid}', null, '${dateAdded}')`);
+    })
     .then( (results) => {   
        return client.query(`delete from response where transactionnum = '${tnum}' `);
     })
 	.then( (results) => {   
         client.end();
-       res.json("Delete successful");
+       res.json("Log successful");
     })
     .catch( (err) => {
         client.end();

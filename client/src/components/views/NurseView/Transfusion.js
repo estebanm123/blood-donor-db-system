@@ -52,11 +52,12 @@ const Transfusion = (props) => {
 
     let handleConfirm = (event) => {
         let tnum = event.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
+        let patientid = event.target.parentElement.parentElement.parentElement.children[1].textContent;
         console.log(tnum);
         fetch(`/api/transfusion/delete`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({tnum: tnum})
+            body: JSON.stringify({tnum: tnum, patientid: patientid, nurseid: props.id})
         })
             .then((res) => {
                 return res.json();
