@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import WelcomePanel from "../../menuGenerics/WelcomePanel";
 import MainPanel from "../../menuGenerics/MainPanel";
-// add managedonation page
+import ManageDonations from "./ManageDonations";
 
 const styles = makeStyles(theme => ({
 }));
@@ -22,16 +22,16 @@ const LabView = (props) => {
         let categoryName = curSelected.parentElement.previousElementSibling.textContext;
         let subCategoryName = curSelected.firstChild.textContent;
         switch (subCategoryName) {
-            // case("Manage Donations"):
-            //     displayPanel = <ManageDonations/>;
-            //     title = 'Manage Donations';
-            //     break;
+            case("View"):
+                displayPanel = <ManageDonations id={props.id} />;
+                title = 'View Donations';
+                break;
         }
     }
 
     return (
         <MainPanel
-            categories={[{'Manage Donations': ['']}]}
+            categories={[{'Manage Donations': ['View']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
             displayPanel={displayPanel}
