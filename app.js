@@ -7,6 +7,7 @@ const requestRouter = require('./routes/requestRouter');
 const transfusionRouter = require('./routes/transfusionRouter');
 const labRouter = require('./routes/labRouter');
 const donationRouter = require('./routes/donationRouter');
+const reportRouter = require('./routes/reportRouter');
 
 const path = require('path');
 
@@ -29,6 +30,7 @@ app.use("/api/request-blood", requestRouter);
 app.use("/api/transfusion", transfusionRouter);
 app.use("/api/lab", labRouter);
 app.use("/api/donation", donationRouter);
+app.use("/api/report", reportRouter);
 
 
 app.get('*', (req, res) => {

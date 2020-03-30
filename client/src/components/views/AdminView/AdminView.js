@@ -5,6 +5,7 @@ import WelcomePanel from "../../menuGenerics/WelcomePanel";
 import AddStaff from "./AddStaff";
 import MainPanel from "../../menuGenerics/MainPanel";
 import AddLab from "./AddLab";
+import Reports from "./Reports";
 
 
 const styles = makeStyles(theme => ({
@@ -42,6 +43,10 @@ const AdminView = (props) => {
                 displayPanel = <AddLab />;
                 title = 'Add New Lab';
                 break;
+            case("Reports"):
+                displayPanel = <Reports />;
+                title = 'Log Reports';
+                break;
         }
     }
 
@@ -49,7 +54,7 @@ const AdminView = (props) => {
         <MainPanel
             categories={[{'Nurse': ['Add Nurse', 'Search']},
             {'Administrator': ['Add Administrator', 'Search']},
-            {'Lab': ['Add Lab', 'Search']}, 
+            {'Lab': ['Add Lab', 'Search', 'Reports']},
             {'Donation Reserve': ['View Reserve']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
