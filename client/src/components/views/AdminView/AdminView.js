@@ -6,6 +6,7 @@ import AddStaff from "./AddStaff";
 import MainPanel from "../../menuGenerics/MainPanel";
 import AddLab from "./AddLab";
 import DonorStats from "./DonorStats";
+import Reports from "./Reports";
 
 
 const styles = makeStyles(theme => ({
@@ -44,17 +45,21 @@ const AdminView = (props) => {
                 title = 'Add New Lab';
                 break;
             case("Donor Stats"):
-                displayPanel = <DonorStats />;
+                displayPanel = <DonorStats categoryName={categoryName}/>;
                 title = 'Donor Stats';
+                break;
+            case("Reports"):
+                displayPanel = <Reports categoryName={categoryName}/>;
+                title = 'Log Reports';
                 break;
         }
     }
 
         return (
         <MainPanel
-            categories={[{'Nurse': ['Add Nurse', 'Search']},
-            {'Administrator': ['Add Administrator', 'Search']},
-            {'Lab': ['Add Lab', 'Search']}, 
+            categories={[{'Nurse': ['Add Nurse']},
+            {'Administrator': ['Add Administrator']},
+                {'Lab': ['Add Lab', 'Reports']},
             {'Donation Reserve': ['View Reserve']},
                 {'Stats': ['Donor Stats']}]}
             handleSelect={handleSelect}

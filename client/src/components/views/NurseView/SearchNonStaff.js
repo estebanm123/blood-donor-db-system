@@ -143,9 +143,6 @@ const SearchNonStaff = (props) => {
                             <Button variant={"contained"} onClick={handleSearch} className={classes["viewall"]}>
                                 Search
                             </Button>
-                            <Button variant={"contained"} onClick={handleSearch} className={classes["viewall"]}>
-                                Find most urgent Patient
-                            </Button>
                         </Grid>
                     </Grid>
                </Paper>

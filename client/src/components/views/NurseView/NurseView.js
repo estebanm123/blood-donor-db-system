@@ -20,7 +20,7 @@ const NurseView = (props) => {
 
     const handleSelect = (selected) => {
         setCurSelected(selected);
-    }
+    };
 
 
     let displayPanel = <WelcomePanel name={props.name} />;
