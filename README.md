@@ -1,6 +1,6 @@
 # blood-donor-db-system
 
-Hosted at : http://blood-donor-system.herokuapp.com/ (doesn't work properly right now)
+Try it out at : http://blood-donor-system.herokuapp.com/ (Please allow up to 30s load, as Heroku free tier shuts down apps after period of inactivity) [Still under construction]
 
 Requires node and yarn installed. 
 
