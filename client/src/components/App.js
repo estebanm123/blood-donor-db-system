@@ -17,7 +17,7 @@ const App = () => {
 
 	const classes = styles();
 	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	const [curUser, setCurUser] = useState({userType: "Admin"}); // set to empty obj //userType: 'Nurse'
+	const [curUser, setCurUser] = useState({userType: 'Admin'}); // set to empty obj //userType: 'Nurse'
 
 	const handleLogin = (user) => {
 		setIsLoggedIn(true);
@@ -38,7 +38,7 @@ const App = () => {
 			view = <NurseView handleLogout={handleLogout} name={name} id={200}/>; //set to curUser.id
 			break;
 		case ('Admin'):
-			view = <AdminView handleLogout={handleLogout} name={name}/>;
+			view = <AdminView handleLogout={handleLogout} name={'asdf'} id={'1231238'}/>;
 			break;
 		case ('Lab'):
 			view = <LabView handleLogout={handleLogout} id={'LAB12345'}/> // set to curUser.id
