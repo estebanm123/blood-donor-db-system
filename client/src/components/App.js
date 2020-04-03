@@ -17,7 +17,11 @@ const App = () => {
 
 	const classes = styles();
 	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	const [curUser, setCurUser] = useState({userType: "Admin"}); // set to empty obj //userType: 'Nurse'
+	const [curUser, setCurUser] = useState({userType: "Nurse"}); // set to empty obj //userType: 'Nurse'
+
+	useEffect(() => {
+		document.title = "Blood Donation Management System"
+	}, []);
 
 	const handleLogin = (user) => {
 		setIsLoggedIn(true);

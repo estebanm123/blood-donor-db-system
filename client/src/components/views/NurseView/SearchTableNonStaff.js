@@ -48,9 +48,9 @@ const SearchTableNonStaff = (props) => {
             data['canDonate'] = select.value;
         }
 
-        let id  = document.querySelector('input').parentElement.parentElement.parentElement.previousElementSibling.textContent;
+        let id = document.querySelector('#saveButton').parentElement.parentElement.firstElementChild.textContent;
+        console.log(id);
         data['id'] = id;
-
         fetch(`/api/nonstaff/edit`, {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
@@ -98,21 +98,21 @@ const SearchTableNonStaff = (props) => {
         if (row.id === editRow) {
             displayRow = (<TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
-                {rows[0].name && <TableCell align="right"><TextField name={"Name"}
+                {row.name && <TableCell align="right"><TextField name={"Name"}
                                                                      error={errors.Name}
                                                                      inputRef={register({ required: true, maxLength: 64 })}
                                                                      defaultValue={row.name.trim()}
                                                                      className={classes["textfieldName"]}
                                                                      helperText={errors.Name? "Required. 64 chars max." : ""}/>
                 </TableCell>}
-                {rows[0].email && <TableCell align="right"><TextField name={"Email"}
+                {row.email && <TableCell align="right"><TextField name={"Email"}
                                              error={errors.Email}
                                              inputRef={register({ required: true, maxLength: 64 })}
                                              defaultValue={row.email.trim()}
                                              className={classes["textfield"]}
                                              helperText={errors.Email? "Required. 64 chars max." : ""}/>
                 </TableCell>}
-                {row[0].phone && <TableCell align="right"><TextField name={"Phone"}
+                {row.phone && <TableCell align="right"><TextField name={"Phone"}
                                                 error={errors.Phone}
                                                 inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
                                                 defaultValue={row.phone.trim()}
@@ -151,7 +151,7 @@ const SearchTableNonStaff = (props) => {
                         </Select>
                     </></TableCell>}
                 <TableCell align="right">
-                    <IconButton onClick={handleSaveEdit}><SaveIcon /></IconButton>
+                    <IconButton id={"saveButton"} onClick={handleSaveEdit}><SaveIcon /></IconButton>
                 </TableCell>
             </TableRow>)
         } else {
