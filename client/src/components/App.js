@@ -16,8 +16,8 @@ const styles = makeStyles(theme => ({
 const App = () => {
 
 	const classes = styles();
-	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	const [curUser, setCurUser] = useState({userType: "Nurse"}); // set to empty obj //userType: 'Nurse'
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // set to FALSE
+	const [curUser, setCurUser] = useState({}); // set to empty obj //userType: 'Nurse'
 
 	useEffect(() => {
 		document.title = "Blood Donation Management System"
@@ -39,10 +39,10 @@ const App = () => {
 	let view;
 	switch (curUser.userType) {
 		case ('Nurse'):
-			view = <NurseView handleLogout={handleLogout} name={name} id={200}/>; //set to curUser.id
+			view = <NurseView handleLogout={handleLogout} name={curUser.name} id={curUser.id}/>; //set to curUser.id
 			break;
 		case ('Admin'):
-			view = <AdminView handleLogout={handleLogout} name={name}/>;
+			view = <AdminView handleLogout={handleLogout} name={curUser.}/>;
 			break;
 		case ('Lab'):
 			view = <LabView handleLogout={handleLogout} id={'LAB12345'}/> // set to curUser.id

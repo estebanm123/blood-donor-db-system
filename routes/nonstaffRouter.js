@@ -29,7 +29,7 @@ router.post('/add', function(req, res, next) {
         '${birthDate}'::date,
         '${req.body.Height}'::integer,
         '${req.body.Weight}'::integer,
-        '${req.body.BloodType}'::char(6))`)
+        '${req.body.bloodtype}'::char(64))`)
 	})
 	.then( (results) => {
         // add patient/ recipient
@@ -38,7 +38,7 @@ router.post('/add', function(req, res, next) {
             values = `('${req.body.ID}'::char(8), ${req.body['Amount Required ml']}::integer)`;
         } else {
             table = 'donor';
-            values = `('${req.body.ID}'::char(8), ${req.body['canDonate'].toLowerCase()}::boolean)`;
+            values = `('${req.body.ID}'::char(8), ${req.body['canDonate']}::boolean)`;
         }
         return client.query(`insert into ${table} values ${values}`)
     })
@@ -49,7 +49,7 @@ router.post('/add', function(req, res, next) {
 	.catch( (err) => {
         console.error(err);
         // TODO delete nonstaff entry
-        res.json(new Error("Failed to add nonstaff."));
+        next(err);
         return;
     });
     
@@ -118,7 +118,7 @@ router.post('/search', function(req, res, next) {
 
 	})
 	.catch( (err) => {
-        console.error(err);
+    console.error(err);
        next(err);
 	});
     

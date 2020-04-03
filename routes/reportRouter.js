@@ -14,7 +14,6 @@ router.post('/view', function(req, res, next) {
                     d.donorid = h.nonstaffid and n.locationid = l.id`)
         .then( (results) => {
             client.end();
-            console.log(results.rows);
             res.json(results.rows);
         })
         .catch( (err) => {
@@ -40,7 +39,6 @@ router.post('/stat', function(req, res, next) {
                     order by l."labId" desc`)
         .then( (results) => {
             client.end();
-            console.log(results.rows);
             res.json(results.rows);
         })
         .catch( (err) => {
@@ -66,7 +64,6 @@ router.post('/total', function(req, res, next) {
                     order by l."labId" desc`)
         .then( (results) => {
             client.end();
-            console.log(results.rows);
             res.json(results.rows);
         })
         .catch( (err) => {
