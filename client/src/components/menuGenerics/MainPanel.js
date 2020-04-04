@@ -29,6 +29,7 @@ const MainPanel = (props) => {
                 categories={props.categories}
                 handleSelect={props.handleSelect}
                 curSelected={props.curSelected}
+                handleLogout={props.handleLogout}
             />
             <main className={classes.content}>
                 <Typography className={classes.title}>{props.title}</Typography>

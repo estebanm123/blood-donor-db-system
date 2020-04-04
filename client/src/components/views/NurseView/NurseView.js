@@ -67,6 +67,7 @@ const NurseView = (props) => {
             handleSelect={handleSelect}
             curSelected={curSelected}
             displayPanel={displayPanel}
+            handleLogout={props.handleLogout}
             title={title}
         />
     );

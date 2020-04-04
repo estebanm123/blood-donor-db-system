@@ -8,7 +8,8 @@ const transfusionRouter = require('./routes/transfusionRouter');
 const labRouter = require('./routes/labRouter');
 const donationRouter = require('./routes/donationRouter');
 const reportRouter = require('./routes/reportRouter');
-
+const adminRequestRouter = require('./routes/adminRequestRouter');
+const reserveViewRouter = require('./routes/reserveViewRouter');
 const path = require('path');
 
 const app = express();
@@ -31,7 +32,8 @@ app.use("/api/transfusion", transfusionRouter);
 app.use("/api/lab", labRouter);
 app.use("/api/donation", donationRouter);
 app.use("/api/report", reportRouter);
-
+app.use("/api/adminReq", adminRequestRouter);
+app.use("/api/reserveView", reserveViewRouter);
 
 
 app.get('*', (req, res) => {

@@ -32,7 +32,6 @@ router.post('/viewDonations', function(req, res, next) {
         connectionString: process.env.DATABASE_URL,
         ssl:              true,
     });
-    console.log('hll');
     client.connect();
     //adding lab tuple
         client.query(`select d.donorid, d.donationid, d.date, d.quantity, h.bloodtype 
@@ -41,7 +40,6 @@ router.post('/viewDonations', function(req, res, next) {
                                 and l."labId" = '${req.body.labid}' and d.istested = 'false'
      `)
 	.then( (results) => {
-        console.log(results.rows);
         client.end();
         res.json(results.rows);
     })

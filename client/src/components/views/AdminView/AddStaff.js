@@ -135,7 +135,6 @@ const AddStaff = (props) => {
                             inputRef={register({ required: true, maxLength: 8})}
                             name={props.extraFieldName}
                             helperText={errors[props.extraFieldName]? "Required. 8 chars max." : "Required"}
-
                         />}
                     </Grid>
                 </Grid>

@@ -7,6 +7,8 @@ import MainPanel from "../../menuGenerics/MainPanel";
 import AddLab from "./AddLab";
 import DonorStats from "./DonorStats";
 import Reports from "./Reports";
+import AdminRequest from "./AdminRequestView";
+import ReserveView from "./DonationReserveView";
 
 
 const styles = makeStyles(theme => ({
@@ -35,9 +37,7 @@ const AdminView = (props) => {
                 let extraFieldMessage = (categoryName === 'Nurse')? 'Required. 8 chars max..' : '';
                 displayPanel = <AddStaff
                     categoryName={categoryName}
-                    extraFieldName={extraFieldName}
-                    extraFieldMessage={extraFieldMessage}
-                    extraField/>;
+                  />;
                 title = `Add New ${categoryName}`;
                 break;
             case("Add Lab"):
@@ -45,12 +45,20 @@ const AdminView = (props) => {
                 title = 'Add New Lab';
                 break;
             case("Donor Stats"):
-                displayPanel = <DonorStats categoryName={categoryName}/>;
+                displayPanel = <DonorStats />;
                 title = 'Donor Stats';
                 break;
             case("Reports"):
-                displayPanel = <Reports categoryName={categoryName}/>;
+                displayPanel = <Reports/>;
                 title = 'Log Reports';
+                break;
+            case("Manage Requests"):
+                displayPanel = <AdminRequest id={props.id}/>
+                title = 'Manage Requests';
+                break;
+            case("View Reserve"):
+                displayPanel = <ReserveView />;
+                title = 'Donation Reserves';
                 break;
         }
     }
@@ -59,10 +67,12 @@ const AdminView = (props) => {
         <MainPanel
             categories={[{'Nurse': ['Add Nurse']},
             {'Administrator': ['Add Administrator']},
-                {'Lab': ['Add Lab', 'Reports']},
+            {'Lab': ['Add Lab', 'Reports']},
+            {'Request': ['Manage Requests']},
             {'Donation Reserve': ['View Reserve']},
-                {'Stats': ['Donor Stats']}]}
+            {'Stats': ['Donor Stats']}]}
             handleSelect={handleSelect}
+            handleLogout={props.handleLogout}
             curSelected={curSelected}
             displayPanel={displayPanel}
             title={title}
