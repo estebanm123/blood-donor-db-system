@@ -30,8 +30,13 @@ Upon launching the app, you will be asked to sign in based on a user type.
 Here are sample id and passwords for each:
 
             Id       Password 
+            
+            
 Nurse:      200      a   
+
 Admin:      1231238  dawdawdawda
+
 Lab:        LAB54321 dkfiuj9ie4ju39
+
 
 
