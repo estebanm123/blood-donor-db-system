@@ -29,8 +29,7 @@ To run locally (from root directory):
 Upon launching the app, you will be asked to sign in based on a user type.
 Here are sample id and passwords for each:
 
-            Id       Password 
-            
+(id then password)
             
 Nurse:      200      a   
 
