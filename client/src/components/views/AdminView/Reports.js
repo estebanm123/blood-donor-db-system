@@ -167,7 +167,7 @@ const Reports = (props) => {
                     {
                         most.map(m => {
                             i++;
-                            console.log(total);
+                            console.log(most);
                             return (<TableRow key={m.labid}>
                                 <TableCell align={"right"}>{m.average}</TableCell>
                             </TableRow>)
