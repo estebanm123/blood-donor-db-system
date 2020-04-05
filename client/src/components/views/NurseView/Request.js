@@ -35,6 +35,7 @@ const Request = (props) => {
     let classes = styles();
     const {register, errors, handleSubmit} = useForm();
     const [apiError, setApiError] = useState('');
+    const [typeSelected, setTypeSelected] = useState("B+");
     const [addSuccessful, setAddSuccessful] = useState(false);
 
     // // below 3 lines ripped from MUI to make date look nice
@@ -45,13 +46,19 @@ const Request = (props) => {
 
     let handleAddAnother = () => {
         setAddSuccessful(false);
-    }
+    };
+
+    let handleTypeSelect = (event) => {
+        setTypeSelected(event.target.value);
+    };
+
 
     let onSubmit = (data) => {
         console.log('before modifying: ' + JSON.stringify(data));
         data.nurseID = props.id;
         console.log('prop id: ' + props.id);
         console.log('data: ' + data);
+        data['Blood Type'] = typeSelected;
         // data['nurse id'] = props.id;
         fetch(`/api/request-blood/add`, {
             method: 'POST',
@@ -103,11 +110,17 @@ const Request = (props) => {
                     </Grid>
                     <Grid container justify={"space-evenly"} alignItems={"center"}>
                         <Grid item>
-                            <TextField name={"Blood Type"}
-                                       error={errors["Blood Type"]}
-                                       inputRef={register({ required: true, maxLength: 3})}
-                                       label={"Blood Type"}
-                                       helperText={errors["Blood Type"]? "Required. 3 digits max." : "Required"}/>
+                            <Typography className={classes.selectText}>Blood Type</Typography>
+                            <Select value={typeSelected} native onChange={handleTypeSelect} className={classes.select} inputRef={register}>
+                                <option value={"B+"} >B+</option>
+                                <option value={"AB-"} >AB-</option>
+                                <option value={"O+"}> O+</option>
+                                <option value={"O-"} >O-</option>
+                                <option value={"A-"} >A-</option>
+                                <option value={"AB+"}> AB+</option>
+                                <option value={"B-"} >B-</option>
+                                <option value={"A+"} >A+</option>
+                            </Select>
                         </Grid>
                         <Grid item>
                         <Grid item>

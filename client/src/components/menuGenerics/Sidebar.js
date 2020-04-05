@@ -12,6 +12,7 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 
 const drawerWidth = 240;
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     toolbar: {
-        'margin-top': '7rem'
+        'margin-top': '0rem'
     },
 
     drawerPaper: {
@@ -48,9 +49,6 @@ const useStyles = makeStyles(theme => ({
     },
     list: {
         'padding': '0rem'
-    },
-    subCatsInactive: {
-        'display': 'none'
     },
     subCatsActive: {
         'display': 'none',
@@ -70,10 +68,17 @@ const useStyles = makeStyles(theme => ({
         'margin-left': '2rem',
         'padding': '.5rem 0'
     },
-    unselected: {
-        'background-color': '#F7F7F7'
-    }
-
+    '@global': {
+        '.unselected': {
+            'background-color': '#F7F7F7'
+        },
+        '.subCatsInactive': {
+            'display': 'none'
+        }
+    },
+    logout: {
+        'margin': '4rem'
+    },
 }));
 
 const Sidebar = (props) => {
@@ -88,47 +93,29 @@ const Sidebar = (props) => {
 
 
     const handleCatClick = (event) => {
-        // janky workaround for clicking sidebar links
-        let inactiveSubCatsClass;
-        if (document.querySelector('.makeStyles-subCatsInactive-11') !== null) {
-            inactiveSubCatsClass = 'makeStyles-subCatsInactive-11';
-        } else if (document.querySelector('.jss11')) {
-            inactiveSubCatsClass = 'jss11';
-        } else if (document.querySelector('.jss294')) {
-            inactiveSubCatsClass = 'jss294';
-        } else {
-            inactiveSubCatsClass = 'jss300';
-        }
 
-        let subCats = event.currentTarget.parentElement.querySelector('.' + inactiveSubCatsClass);
+        let subCats = event.currentTarget.parentElement.querySelector('.subCatsInactive');
         console.log(subCats);
-        if (subCats && subCats.classList.contains(inactiveSubCatsClass)) { // if found and is inactive
-            subCats.classList.remove(inactiveSubCatsClass);
+        if (subCats && subCats.classList.contains('subCatsInactive')) { // if found and is inactive
+            subCats.classList.remove('subCatsInactive');
             let allSubCats = subCats.parentElement.parentElement.parentElement.querySelectorAll('ul');
             for (let list of allSubCats) {
-                if (list !== subCats && !list.classList.contains(inactiveSubCatsClass)) {
-                    list.classList.add(inactiveSubCatsClass);
-                   // let allSubCatsItems = list.querySelectorAll('div[role="button"]');
-                    const unselectedClass = document.querySelector('.makeStyles-unselected-16')? 'makeStyles-unselected-16' :
-                        document.querySelector('.jss16')? 'jss16' : document.querySelector('.jss304')? 'jss304': 'jss299';
+                if (list !== subCats && !list.classList.contains('subCatsInactive')) {
+                    list.classList.add('subCatsInactive');
 
-                    if (props.curSelected) props.curSelected.classList.add(unselectedClass);
+                    if (props.curSelected) props.curSelected.classList.add('unselected');
                 }
             }
 
             props.handleSelect(null);
 
         }
-    }
+    };
 
     const handleSubCatClick = (event) => {
-        const unselectedClass = document.querySelector('.makeStyles-unselected-16')? 'makeStyles-unselected-16' :
-            document.querySelector('.jss16')? 'jss16' : document.querySelector('.jss304')? 'jss304': 'jss299';
-
-
         if (!props.curSelected || (props.curSelected && props.curSelected !== event.currentTarget)) {
-            event.currentTarget.classList.remove(unselectedClass);
-            if (props.curSelected) props.curSelected.classList.add(unselectedClass);
+            event.currentTarget.classList.remove('unselected');
+            if (props.curSelected) props.curSelected.classList.add('unselected');
         }
         props.handleSelect(event.currentTarget);
 
@@ -136,7 +123,9 @@ const Sidebar = (props) => {
 
     const drawer = (
         <div>
-            <div className={classes.toolbar} />
+            <div >
+                <Button className={classes.logout} variant={"contained"} onClick={props.handleLogout}>Logout</Button>
+            </div>
             <Divider />
             <List className={classes.list}>
                 {props.categories.map((category, index) => (
@@ -147,11 +136,11 @@ const Sidebar = (props) => {
                             <div onClick={handleCatClick} className={classes.clickableText}>
                                 {Object.keys(category)[0]}
                             </div>
-                            <List className={`${classes.subCatsInactive} ${classes.subList}`}>
+                            <List className={`subCatsInactive ${classes.subList}`}>
                                 {category[Object.keys(category)[0]].map((subCat, index) => (
                                     <ListItem button
                                               key={subCat}
-                                              className={`${classes.subCat} ${classes.unselected}`}
+                                              className={`${classes.subCat} unselected`}
                                               onClick={handleSubCatClick}>
                                         <Container>
                                             {subCat}

@@ -14,12 +14,11 @@ const LabView = (props) => {
 
     const handleSelect = (selected) => {
         setCurSelected(selected);
-    }
+    };
 
     let displayPanel = <WelcomePanel name={props.name} />
     let title = "";
     if (curSelected) {
-        let categoryName = curSelected.parentElement.previousElementSibling.textContext;
         let subCategoryName = curSelected.firstChild.textContent;
         switch (subCategoryName) {
             case("View"):
@@ -34,6 +33,7 @@ const LabView = (props) => {
             categories={[{'Manage Donations': ['View']}]}
             handleSelect={handleSelect}
             curSelected={curSelected}
+            handleLogout={props.handleLogout}
             displayPanel={displayPanel}
             title={title}
         />

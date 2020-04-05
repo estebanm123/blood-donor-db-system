@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { useForm } from 'react-hook-form';
 import Select from "@material-ui/core/Select";
+import Checkbox from "@material-ui/core/Checkbox";
 
 
 const styles = makeStyles(theme => ({
@@ -29,8 +30,11 @@ const styles = makeStyles(theme => ({
     submit: {
         'margin': '3rem 0 2rem 0'
     },
-    canDonate: {
+    selectText: {
         'font-size': '.7rem'
+    },
+    select: {
+        'width': '12rem'
     }
 }));
 
@@ -40,6 +44,8 @@ const AddNonStaff = (props) => {
     const {register, errors, handleSubmit} = useForm();
     const [apiError, setApiError] = useState('');
     const [addSuccessful, setAddSuccessful] = useState(false);
+    const [typeSelected, setTypeSelected] = useState("B+");
+    const [canDonate, setCanDonate] = useState(false);
 
     // below 3 lines ripped from MUI to make date look nice
     const [selectedDate, setSelectedDate] = React.useState(new Date('1900-01-02'));
@@ -47,17 +53,24 @@ const AddNonStaff = (props) => {
         setSelectedDate(date);
     };
 
+    let handleCanDonateTick = () => {
+        setCanDonate(!canDonate);
+    };
+
     let handleAddAnother = () => {
         setAddSuccessful(false);
-    }
+    };
+
+    let handleTypeSelect = (event) => {
+        setTypeSelected(event.target.value);
+    };
 
     let onSubmit = (data) => {
         let dateOfBirth = document.querySelector('#date-picker-dialog').value;
         if (props.categoryName === 'Donors') {
-            let select = document.querySelector('select'); // grab the only select in document - refactor if you add more
-            data['canDonate'] = select.value;
+            data['canDonate'] = canDonate;
         }
-
+        data["bloodtype"] = typeSelected;
         data['birthdate'] = dateOfBirth;
         data['category'] = props.categoryName;
 
@@ -165,11 +178,17 @@ const AddNonStaff = (props) => {
                                    helperText={errors.Weight? "Required. Positive Integer." : "Required"}/>
                     </Grid>
                     <Grid item>
-                        <TextField name={"BloodType"}
-                                   error={errors.BloodType}
-                                   inputRef={register({ required: true, maxLength: 6 })}
-                                   label={"Blood Type"}
-                                   helperText={errors.BloodType? "Required. Blood Type invalid." : "Required"}/>
+                        <Typography className={classes.selectText}>Blood Type</Typography>
+                        <Select value={typeSelected} native onChange={handleTypeSelect} className={classes.select} inputRef={register}>
+                            <option value={"B+"} >B+</option>
+                            <option value={"AB-"} >AB-</option>
+                            <option value={"O+"}> O+</option>
+                            <option value={"O-"} >O-</option>
+                            <option value={"A-"} >A-</option>
+                            <option value={"AB+"}> AB+</option>
+                            <option value={"B-"} >B-</option>
+                            <option value={"A+"} >A+</option>
+                        </Select>
                     </Grid>
                 </Grid>
                 <Grid container justify={"space-evenly"} alignItems={"center"}>
@@ -184,11 +203,15 @@ const AddNonStaff = (props) => {
                         />}
                         {props.extraFieldName === 'Can donate' &&
                         <>
-                            <Typography className={classes.canDonate}>Can donate</Typography>
-                            <Select native inputRef={register}>
-                                <option value={"true"} >True</option>
-                                <option value={"false"} >False</option>
-                            </Select>
+                            <Typography className={classes.selectText}>Can donate</Typography>
+                            <Checkbox
+                                onChange={handleCanDonateTick}
+                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />
+                            {/*<Select native onChange={handleCanDonateSelect} inputRef={register}>*/}
+                            {/*    <option value={"true"} >True</option>*/}
+                            {/*    <option value={"false"} >False</option>*/}
+                            {/*</Select>*/}
                         </>}
                     </Grid>
                 </Grid>

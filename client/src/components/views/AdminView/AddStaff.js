@@ -122,7 +122,7 @@ const AddStaff = (props) => {
                     <Grid item>
                         <TextField name={"Name"}
                                    error={errors.Name}
-                                   inputRef={register({ required: true, maxLength: 10 })}
+                                   inputRef={register({ required: true, maxLength: 64})}
                                    label={"Name"}
                                    helperText={errors.Name? "Required. 64 chars max.  " : "Required"}/>
                     </Grid>

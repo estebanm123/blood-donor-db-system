@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NurseView from "./views/NurseView/NurseView";
 import AdminView from "./views/AdminView/AdminView";
 import LabView from "./views/LabView/LabView";
+import { createGenerateClassName, StylesProvider } from '@material-ui/core/styles';
 
 
 const styles = makeStyles(theme => ({
@@ -16,9 +17,9 @@ const styles = makeStyles(theme => ({
 const App = () => {
 
 	const classes = styles();
-	const [isLoggedIn, setIsLoggedIn] = useState(true); // set to FALSE
-	// const [curUser, setCurUser] = useState({userType: 'Admin'}); // set to empty obj //userType: 'Nurse'
-	const [curUser, setCurUser] = useState({userType: "Nurse"}); // set to empty obj //userType: 'Nurse'
+
+	const [isLoggedIn, setIsLoggedIn] = useState(false); // set to FALSE
+	const [curUser, setCurUser] = useState({}); // set to empty obj //userType: 'Nurse'
 
 	useEffect(() => {
 		document.title = "Blood Donation Management System"
@@ -27,11 +28,13 @@ const App = () => {
 	const handleLogin = (user) => {
 		setIsLoggedIn(true);
 		setCurUser(user);
-	}
+	};
 
 	const handleLogout = () => {
 		setIsLoggedIn(false);
-	}
+		setCurUser({});
+	};
+
 	let name;
 	if (curUser && curUser.name) {
 		name = curUser.name.substring(0, curUser.name.indexOf(" "));
@@ -40,18 +43,19 @@ const App = () => {
 	let view;
 	switch (curUser.userType) {
 		case ('Nurse'):
-			view = <NurseView handleLogout={handleLogout} name={name} id={200}/>; //set to curUser.id
+			view = <NurseView handleLogout={handleLogout} name={curUser.name} id={curUser.id}/>; //set to curUser.id
 			break;
 		case ('Admin'):
-			view = <AdminView handleLogout={handleLogout} name={'asdf'} id={'1231238'}/>;
+			view = <AdminView handleLogout={handleLogout} name={curUser.name} id={curUser.id}/>;
 			break;
 		case ('Lab'):
-			view = <LabView handleLogout={handleLogout} id={'LAB12345'}/> // set to curUser.id
+			view = <LabView handleLogout={handleLogout} id={curUser.id}/> // set to curUser.id
 	}
 
 
 
 	return (
+
 	<>
 		{!isLoggedIn && <Login handleLogin={handleLogin}/>}
 		{isLoggedIn && view}

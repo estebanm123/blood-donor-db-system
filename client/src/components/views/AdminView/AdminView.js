@@ -47,11 +47,11 @@ const AdminView = (props) => {
                 title = 'Add New Lab';
                 break;
             case("Donor Stats"):
-                displayPanel = <DonorStats categoryName={categoryName}/>;
+                displayPanel = <DonorStats />;
                 title = 'Donor Stats';
                 break;
             case("Reports"):
-                displayPanel = <Reports categoryName={categoryName}/>;
+                displayPanel = <Reports/>;
                 title = 'Log Reports';
                 break;
             case("Manage Requests"):
@@ -74,6 +74,7 @@ const AdminView = (props) => {
             {'Donation Reserve': ['View Reserve']},
             {'Stats': ['Donor Stats']}]}
             handleSelect={handleSelect}
+            handleLogout={props.handleLogout}
             curSelected={curSelected}
             displayPanel={displayPanel}
             title={title}

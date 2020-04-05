@@ -25,4 +25,17 @@ To run locally (from root directory):
       cd ..
 
       npm start 
+      
+Upon launching the app, you will be asked to sign in based on a user type.
+Here are sample id and passwords for each:
+
+(id password)
+            
+Nurse:      200      a   
+
+Admin:      1231238  dawdawdawda
+
+Lab:        LAB54321 dkfiuj9ie4ju39
+
+
 

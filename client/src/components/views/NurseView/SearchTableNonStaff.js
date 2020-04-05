@@ -131,12 +131,7 @@ const SearchTableNonStaff = (props) => {
                                               className={classes["textfield"]}
                                               defaultValue={row.weight}
                                               helperText={errors.Weight? "Required. Positive Integer." : ""}/></TableCell>}
-                {row.bloodtype && <TableCell align="right"><TextField name={"BloodType"}
-                                           error={errors.BloodType}
-                                           className={classes["textfield"]}
-                                           defaultValue={row.bloodtype.trim()}
-                                           inputRef={register({ required: true, maxLength: 6 })}
-                                           helperText={errors.BloodType? "Required. Blood Type invalid." : ""}/></TableCell>}
+                {row.bloodtype && <TableCell align="right">{row.bloodtype}</TableCell>}
                     {row.amtrequired && <TableCell align="right"><TextField
                         error={errors['amountRequired']}
                         inputRef={register({ required: true, maxLength: 10, pattern: /^\d+$/ })}
