@@ -23,6 +23,7 @@ const Reports = (props) => {
     let [rows, setRows] = useState([]);
     let [stats, setStats] = useState([]);
     let [total, setTotal] = useState([]);
+    let [most, setMost] = useState([]);
 
     let classes = styles();
     let i = -1;
@@ -78,10 +79,28 @@ const Reports = (props) => {
             });
     };
 
+    let getMost = () => {
+        fetch(`/api/report/max`, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                setMost(res);
+            })
+            .catch((err) => {
+                console.error(err);
+                // TODO: handle error
+            });
+    };
+
     useEffect(() => {
         getRows();
         getStat();
         getTotal();
+        getMost();
         console.log(stats);
     }, []);
 
@@ -133,6 +152,26 @@ const Reports = (props) => {
                             <TableCell align={"right"}>{(total.length === 0)? '...' : total[i].totalnum}</TableCell>
                         </TableRow>)
                     })}
+                </TableBody>
+            </Table>
+        </TableContainer>
+        <TableContainer className={classes.table} component={Paper}>
+            <Table aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="right">Average # of Failed Tests From a Lab </TableCell>
+                        <TableCell align="right" />
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        most.map(m => {
+                            i++;
+                            console.log(total);
+                            return (<TableRow key={m.labid}>
+                                <TableCell align={"right"}>{m.average}</TableCell>
+                            </TableRow>)
+                        })}
                 </TableBody>
             </Table>
         </TableContainer>
