@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import WelcomePanel from "../../menuGenerics/WelcomePanel";
 import AddStaff from "./AddStaff";
 import MainPanel from "../../menuGenerics/MainPanel";
-import AddLab from "./AddLab";
 import DonorStats from "./DonorStats";
 import Reports from "./Reports";
 import AdminRequest from "./AdminRequestView";
@@ -42,10 +41,10 @@ const AdminView = (props) => {
                     extraField/>;
                 title = `Add New ${categoryName}`;
                 break;
-            case("Add Lab"):
-                displayPanel = <AddLab />;
-                title = 'Add New Lab';
-                break;
+            // case("Add Lab"):
+            //     displayPanel = <AddLab />;
+            //     title = 'Add New Lab';
+            //     break;
             case("Donor Stats"):
                 displayPanel = <DonorStats />;
                 title = 'Donor Stats';
@@ -69,7 +68,7 @@ const AdminView = (props) => {
         <MainPanel
             categories={[{'Nurse': ['Add Nurse']},
             {'Administrator': ['Add Administrator']},
-            {'Lab': ['Add Lab', 'Reports']},
+            {'Lab': ['Reports']},
             {'Request': ['Manage Requests']},
             {'Donation Reserve': ['View Reserve']},
             {'Stats': ['Donor Stats']}]}
