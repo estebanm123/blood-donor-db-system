@@ -13,7 +13,7 @@ Setup:
 
       yarn install
 
-And you'd need to set the environment variable DATABASE_URL. 
+And you'd need to set the environment variable DATABASE_URL to a PostgreSQL database, initialized with database creation script in root folder (databaseScript.sql)
 
 To run locally (from root directory):
 - run the following commands:
