@@ -167,9 +167,29 @@ router.post('/edit', function(req, res, next) {
 	.catch( (err) => {
         console.error(err);
        next(err);
-	});
+    });
+});
+    
+router.post('/delete', function(req, res, next) {    
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl:				true,
+    });
+
+    client.connect();
+    
+    client.query(`delete from nonstaff where id = '${req.body.id}'`)
+    .then( (results) => {
+        client.end();
+        res.json("delete successful")
+
+    })
+    .catch( (err) => {
+        console.error(err);
+        next(err);
+    });
+});
     
 
-});
 
 module.exports = router;

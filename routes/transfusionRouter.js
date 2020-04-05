@@ -16,7 +16,6 @@ router.post('/view', function(req, res, next) {
                             and n.id = r.patientid`)
 	.then( (results) => {   
         client.end();
-       console.log(results.rows);
        res.json(results.rows);
     })
     .catch( (err) => {

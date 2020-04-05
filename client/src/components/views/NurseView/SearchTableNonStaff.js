@@ -69,13 +69,36 @@ const SearchTableNonStaff = (props) => {
             });
     };
 
+    let deleteRow = (rowID) => {
+        console.log(rowID);
+        fetch(`/api/nonstaff/delete`, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({id: rowID})
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                props.submitReload();
+            })
+            .catch((err) => {
+                console.error(err);
+                // TODO: add error
+            });
+    };
+
     let handleItemSelect = (option) => {
         switch (option.name) {
             case "Edit":
                 setEditRow(option.row);
                 break;
+            case "Delete":
+                deleteRow(option.row);
+                break;
         }
     };
+
 
     let rows = props.rows;
     let tableHeadings = (rows.length > 0)? <TableRow>
@@ -165,7 +188,7 @@ const SearchTableNonStaff = (props) => {
                 <TableCell align="right">
                     {editRow?
                         <OptionMenu handleItemSelect={handleItemSelect} options={[]} id={row.id}/>
-                        : <OptionMenu handleItemSelect={handleItemSelect} options={["Edit"]} id={row.id}/>}
+                        : <OptionMenu handleItemSelect={handleItemSelect} options={["Edit", "Delete"]} id={row.id}/>}
                 </TableCell>
             </TableRow>);
         }

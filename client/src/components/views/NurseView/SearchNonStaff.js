@@ -70,7 +70,7 @@ const SearchNonStaff = (props) => {
                 console.error(err);
                 setError(`An error has occurred. Could not display ${props.categoryName}`)
             });
-    }
+    };
 
     let handleSelect = (event) => {
         setSearchBy(event.target.value);

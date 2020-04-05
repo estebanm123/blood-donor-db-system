@@ -1,0 +1,2 @@
+- adminrequest router features a join and selection statements that feature user input
+- transfusion router also has select based on user 
