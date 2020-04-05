@@ -40,7 +40,11 @@ router.post('/delete', function(req, res, next) {
     .then (() => {
         let curDate = new Date();
         let dateAdded = `${curDate.getFullYear()}-${curDate.getMonth()}-${curDate.getDate()}`;
-          return client.query(`insert into transfusion values ('${Math.random().toString(36).substr(2, 8)}', '${req.body.patientid}', '${req.body.nurseid}', null, '${dateAdded}')`);
+          return client.query(`insert into transfusion values ('${Math.random().toString(36).substr(2, 8)}',
+           '${req.body.patientid}', 
+           '${req.body.nurseid}', 
+           null, 
+           '${dateAdded}')`);
     })
     .then( (results) => {   
        return client.query(`delete from response where transactionnum = '${tnum}' `);
