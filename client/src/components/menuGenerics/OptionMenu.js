@@ -44,7 +44,7 @@ export default function OptionMenu(props) {
                 onClose={handleClose}
                 PaperProps={{
                     style: {
-                        maxHeight: '5rem',
+                        maxHeight: '8rem',
                         width: '20ch',
                     },
                 }}
