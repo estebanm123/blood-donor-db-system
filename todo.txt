@@ -1,8 +1,14 @@
 - add build to gitignore? to test locally
 
-- Add Patients: do we really need to assign an ID to a patient every time time we add them
-    or we can make the database automatically set the ID for the patient that has not been
-    assigned yet (eg. we do not assign a transaction number to a request directly)?
+Nurse
+Add patient does not need amount required.
+Add request does not need blood type required.
+Can you have more than one request at the same time for a single patient.
 
-- for blood types, should we reject if the input blood type is not a real blood type?
+Admin
+Admin cannot add labs!
+
+
+
+
 
