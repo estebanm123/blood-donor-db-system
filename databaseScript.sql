@@ -122,7 +122,7 @@ CREATE TABLE public.donationitem
     CONSTRAINT donationitem_donorid_fkey FOREIGN KEY (donorid)
         REFERENCES public.donor (donorid) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT donationitem_nurseid_fkey FOREIGN KEY (nurseid)
         REFERENCES public.nurse (id) MATCH SIMPLE
@@ -179,7 +179,7 @@ CREATE TABLE public.request
     CONSTRAINT patient FOREIGN KEY (patient)
         REFERENCES public.recipient (recipientid) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE SET NULL
         NOT VALID
 );
 
@@ -217,7 +217,7 @@ CREATE TABLE public.response
     CONSTRAINT response_patientid_fkey FOREIGN KEY (patientid)
         REFERENCES public.recipient (recipientid) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE SET NULL
 );
 
 CREATE TABLE public.respondsto
