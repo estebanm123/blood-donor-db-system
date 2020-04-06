@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 DROP TABLE public.transfusion;
 DROP TABLE public.respondsto;
 DROP TABLE public.response;
@@ -383,7 +382,6 @@ INSERT INTO public.transfusion VALUES('t3', 'ns8', 'N300', 902, '2020-03-07');
 INSERT INTO public.transfusion VALUES('t4', 'ns9', 'N400', 903, '2020-03-07');
 INSERT INTO public.transfusion VALUES('t5', 'ns10', 'N500', 904, '2020-03-07');
 
-=======
 CREATE TABLE public.administrator
 (
     id character(8) COLLATE pg_catalog."default" NOT NULL,
@@ -747,4 +745,5 @@ INSERT INTO public.transfusion VALUES('t2', 'nonstaff7', 'n200', 200, '2020-03-0
 INSERT INTO public.transfusion VALUES('t3', 'nonstaff8', 'n300', 300, '2020-03-07');
 INSERT INTO public.transfusion VALUES('t4', 'nonstaff9', 'n400', 400, '2020-03-07');
 INSERT INTO public.transfusion VALUES('t5', 'nonstaff10', 'n500', 500, '2020-03-07');
->>>>>>> 39a4b596022ecf23ff80adfe492aa7c4cb3bd426
+
+                                
