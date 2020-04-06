@@ -1,20 +1,20 @@
-DROP TABLE public.transfusion;
-DROP TABLE public.respondsto;
-DROP TABLE public.response;
-DROP TABLE public.requests;
-DROP TABLE public.request;
-DROP TABLE public.report;
-DROP TABLE public."reportReasonCode";
-DROP TABLE public.recipient;
-DROP TABLE public.donationitem;
-DROP TABLE public.nurse;
-DROP TABLE public.location;
-DROP TABLE public.lab;
-DROP TABLE public.healthinfohasa;
-DROP TABLE public.donor;
-DROP TABLE public.nonstaff;
-DROP TABLE public.donationreserves;
-DROP TABLE public.administrator;
+DROP TABLE if exists public.transfusion;
+DROP TABLE if exists public.respondsto;
+DROP TABLE if exists public.response;
+DROP TABLE if exists public.requests;
+DROP TABLE if exists public.request;
+DROP TABLE if exists public.report;
+DROP TABLE if exists public."reportReasonCode";
+DROP TABLE if exists public.recipient;
+DROP TABLE if exists public.donationitem;
+DROP TABLE if exists public.nurse;
+DROP TABLE if exists public.location;
+DROP TABLE if exists public.lab;
+DROP TABLE if exists public.healthinfohasa;
+DROP TABLE if exists public.donor;
+DROP TABLE if exists public.nonstaff;
+DROP TABLE if exists public.donationreserves;
+DROP TABLE if exists public.administrator;
 
 
 
