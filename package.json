@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "acorn": "^7.1.1",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.4",
     "debug": "~4.1.1",
-    "express": "~4.17.1",
+    "express": "~4.17.3",
     "http-errors": "~1.7.3",
     "morgan": "~1.9.1",
     "pg": "^7.18.2",
